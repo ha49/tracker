@@ -1,0 +1,134 @@
+package com.example.demo;
+
+import com.example.demo.entity.*;
+import com.example.demo.enums.Gender;
+import com.example.demo.enums.LifeStyle;
+import com.example.demo.enums.Specialization;
+import com.example.demo.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.sql.Date;
+
+@SpringBootApplication
+public class TrackerApplication implements CommandLineRunner {
+
+
+        @Autowired
+        private CoachFlxService coachFlxService;
+
+        @Autowired
+        private LinkFlxService linkFlxService;
+
+        @Autowired
+        private ClientFlxService clientFlxService;
+
+        @Autowired
+        private DocumentFlxService documentFlxService;
+
+        @Autowired
+        private TrackingFlxService trackingFlxService;
+
+        @Override
+        public void run(String... args) throws Exception {
+            createData();
+        }
+
+        private void createData() {
+            String str = "2015-03-31";
+
+            CoachFlx coachFlx1 = new CoachFlx("Mike", "Taylor", Specialization.FITNESSCOACH, "mike.taylor@email.com",
+                    "000001");
+            CoachFlx coachFlx2 = new CoachFlx("Sara", "Skat", Specialization.DIETITIAN, "sara.skat@email.com", "000002");
+            CoachFlx coachFlx3 = new CoachFlx("Michael", "Douglas", Specialization.FITNESSCOACH, "michael.daouglas@email.com",
+                    "000003");
+
+            coachFlxService.addCoach(coachFlx1);
+            coachFlxService.addCoach(coachFlx2);
+            coachFlxService.addCoach(coachFlx3);
+
+            for (int i = 1; i < 3; i++) {
+                LinkFlx linkFlx = new LinkFlx("Streching_" + i, "http://test.com/Streching_" + i, coachFlx1);
+                linkFlxService.addLink(linkFlx);
+            }
+            for (int i = 1; i < 3; i++) {
+                LinkFlx linkFlx = new LinkFlx("Zumba_" + i, "http://test.com/Zumba_" + i, coachFlx2);
+                linkFlxService.addLink(linkFlx);
+            }
+
+/*
+        for (int i = 1; i < 50; i++) {
+            //Date registerDate = Date.valueOf("02/11/2020");
+            ClientFlx clientFlx  = new ClientFlx(
+                    "ClientFirstName_" + i,
+                    "Surname_"+i,
+                    50+i*2,
+                    160+i,
+                    "email_"+i+"@mail.com",
+                    "00000"+i,
+                    "diet_"+i,
+                    Date.valueOf(str),
+                    null,
+                    null,
+                    coachFlx1 );
+            clientFlxService.addClient(clientFlx);
+        }
+
+        for (int i = 1; i < 10; i++) {
+            ClientFlx clientFlx = new ClientFlx("ClientFirstName_" + i, "Surname_"+i, 50+i*2, 160+i, "email_"+i+"@mail.com", "00000"+i, "diet_"+i, Date.valueOf(str), i%2==0?Gender.MALE:Gender.FEMALE, i%2==0? LifeStyle.ACTIVE:LifeStyle.SLOW,coachFlx2 );
+            clientFlxService.addClient(clientFlx);
+        }*/
+
+            ClientFlx clientFlx1 = new ClientFlx(
+                    "Ben", "Ben", 76,
+                    168, "email@mail.com", "0000012",
+                    "diet", Date.valueOf(str), Gender.MALE,
+                    LifeStyle.ACTIVE, coachFlx1);
+
+            ClientFlx clientFlx2 = new ClientFlx(
+                    "Ben2", "Ben2", 77,
+                    160, "email2@mail.com", "00000134",
+                    "diet2", Date.valueOf(str), Gender.MALE,
+                    LifeStyle.ACTIVE, coachFlx2);
+
+            ClientFlx clientFlx3 = new ClientFlx(
+                    "Ben3", "Ben3", 70,
+                    165, "email3@mail.com", "0000013",
+                    "diet3", Date.valueOf(str), Gender.MALE,
+                    LifeStyle.ACTIVE, coachFlx3);
+
+            clientFlxService.addClient(clientFlx1);
+            clientFlxService.addClient(clientFlx2);
+            clientFlxService.addClient(clientFlx3);
+
+
+            DocumentFlx documentFlx1 = new DocumentFlx(clientFlx1, "bloodtest", "http://test.com/Streching");
+            documentFlxService.addDocument(documentFlx1);
+
+            DocumentFlx documentFlx2 = new DocumentFlx(clientFlx2, "checkup", "http://test.com/Zumba");
+            documentFlxService.addDocument(documentFlx2);
+
+            DocumentFlx documentFlx3 = new DocumentFlx(clientFlx3, "blood3", "http://test.com/Zumba");
+            documentFlxService.addDocument(documentFlx3);
+
+            TrackingFlx trackingFlx1 = new TrackingFlx(clientFlx1, Date.valueOf(str), 3,  2, 5, "I am good",
+                    "String coachNote", false, "motivationalMessagePath");
+
+            TrackingFlx trackingFlx2 = new TrackingFlx(clientFlx2, Date.valueOf(str), 4,  1, 1, "I am good",
+                    "String coachNote2", true, "motivationalMessagePath2");
+
+            TrackingFlx trackingFlx3 = new TrackingFlx(clientFlx3, Date.valueOf(str), 5,  3, 2, "I am good",
+                    "String coachNote3", true, "motivationalMessagePath3");
+
+            trackingFlxService.addTracking(trackingFlx1);
+            trackingFlxService.addTracking(trackingFlx2);
+            trackingFlxService.addTracking(trackingFlx3);
+        }
+
+    public static void main(String[] args) {
+        SpringApplication.run(TrackerApplication.class, args);
+    }
+
+}
