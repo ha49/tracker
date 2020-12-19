@@ -7,7 +7,7 @@ import com.example.demo.enums.Specialization;
 import com.example.demo.repository.ClientFlxRepository;
 import com.example.demo.repository.CoachFlxRepository;
 import com.example.demo.repository.DocumentFlxRepository;
-import com.example.demo.service.LinkFlxService;
+import com.example.demo.repository.LinkFlxRepository;
 import com.example.demo.service.TrackingFlxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,7 +24,7 @@ public class TrackerApplication implements CommandLineRunner {
         private CoachFlxRepository coachFlxRepository;
 
         @Autowired
-        private LinkFlxService linkFlxService;
+        private LinkFlxRepository linkFlxRepository;
 
         @Autowired
         private ClientFlxRepository clientFlxRepository;
@@ -55,11 +55,11 @@ public class TrackerApplication implements CommandLineRunner {
 
             for (int i = 1; i < 3; i++) {
                 LinkFlx linkFlx = new LinkFlx("Streching_" + i, "http://test.com/Streching_" + i, coachFlx1);
-                linkFlxService.addLink(linkFlx);
+                linkFlxRepository.save(linkFlx);
             }
             for (int i = 1; i < 3; i++) {
                 LinkFlx linkFlx = new LinkFlx("Zumba_" + i, "http://test.com/Zumba_" + i, coachFlx2);
-                linkFlxService.addLink(linkFlx);
+                linkFlxRepository.save(linkFlx);
             }
 
 /*
