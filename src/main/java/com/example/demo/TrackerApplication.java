@@ -6,7 +6,9 @@ import com.example.demo.enums.LifeStyle;
 import com.example.demo.enums.Specialization;
 import com.example.demo.repository.ClientFlxRepository;
 import com.example.demo.repository.CoachFlxRepository;
-import com.example.demo.service.*;
+import com.example.demo.repository.DocumentFlxRepository;
+import com.example.demo.service.LinkFlxService;
+import com.example.demo.service.TrackingFlxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,7 +30,7 @@ public class TrackerApplication implements CommandLineRunner {
         private ClientFlxRepository clientFlxRepository;
 
         @Autowired
-        private DocumentFlxService documentFlxService;
+        private DocumentFlxRepository documentFlxRepository;
 
         @Autowired
         private TrackingFlxService trackingFlxService;
@@ -107,13 +109,13 @@ public class TrackerApplication implements CommandLineRunner {
 
 
             DocumentFlx documentFlx1 = new DocumentFlx(clientFlx1, "bloodtest", "http://test.com/Streching");
-            documentFlxService.addDocument(documentFlx1);
+            documentFlxRepository.save(documentFlx1);
 
             DocumentFlx documentFlx2 = new DocumentFlx(clientFlx2, "checkup", "http://test.com/Zumba");
-            documentFlxService.addDocument(documentFlx2);
+            documentFlxRepository.save(documentFlx2);
 
             DocumentFlx documentFlx3 = new DocumentFlx(clientFlx3, "blood3", "http://test.com/Zumba");
-            documentFlxService.addDocument(documentFlx3);
+            documentFlxRepository.save(documentFlx3);
 
             TrackingFlx trackingFlx1 = new TrackingFlx(clientFlx1, Date.valueOf(str), 3,  2, 5, "I am good",
                     "String coachNote", false, "motivationalMessagePath");
