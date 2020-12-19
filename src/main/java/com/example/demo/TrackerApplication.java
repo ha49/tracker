@@ -4,6 +4,8 @@ import com.example.demo.entity.*;
 import com.example.demo.enums.Gender;
 import com.example.demo.enums.LifeStyle;
 import com.example.demo.enums.Specialization;
+import com.example.demo.repository.ClientFlxRepository;
+import com.example.demo.repository.CoachFlxRepository;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,13 +19,13 @@ public class TrackerApplication implements CommandLineRunner {
 
 
         @Autowired
-        private CoachFlxService coachFlxService;
+        private CoachFlxRepository coachFlxRepository;
 
         @Autowired
         private LinkFlxService linkFlxService;
 
         @Autowired
-        private ClientFlxService clientFlxService;
+        private ClientFlxRepository clientFlxRepository;
 
         @Autowired
         private DocumentFlxService documentFlxService;
@@ -45,9 +47,9 @@ public class TrackerApplication implements CommandLineRunner {
             CoachFlx coachFlx3 = new CoachFlx("Michael", "Douglas", Specialization.FITNESSCOACH, "michael.daouglas@email.com",
                     "000003");
 
-            coachFlxService.addCoach(coachFlx1);
-            coachFlxService.addCoach(coachFlx2);
-            coachFlxService.addCoach(coachFlx3);
+            coachFlxRepository.save(coachFlx1);
+            coachFlxRepository.save(coachFlx2);
+            coachFlxRepository.save(coachFlx3);
 
             for (int i = 1; i < 3; i++) {
                 LinkFlx linkFlx = new LinkFlx("Streching_" + i, "http://test.com/Streching_" + i, coachFlx1);
@@ -73,12 +75,12 @@ public class TrackerApplication implements CommandLineRunner {
                     null,
                     null,
                     coachFlx1 );
-            clientFlxService.addClient(clientFlx);
+            clientFlxRepository.save(clientFlx);
         }
 
         for (int i = 1; i < 10; i++) {
             ClientFlx clientFlx = new ClientFlx("ClientFirstName_" + i, "Surname_"+i, 50+i*2, 160+i, "email_"+i+"@mail.com", "00000"+i, "diet_"+i, Date.valueOf(str), i%2==0?Gender.MALE:Gender.FEMALE, i%2==0? LifeStyle.ACTIVE:LifeStyle.SLOW,coachFlx2 );
-            clientFlxService.addClient(clientFlx);
+            clientFlxRepository.save(clientFlx);
         }*/
 
             ClientFlx clientFlx1 = new ClientFlx(
@@ -99,9 +101,9 @@ public class TrackerApplication implements CommandLineRunner {
                     "diet3", Date.valueOf(str), Gender.MALE,
                     LifeStyle.ACTIVE, coachFlx3);
 
-            clientFlxService.addClient(clientFlx1);
-            clientFlxService.addClient(clientFlx2);
-            clientFlxService.addClient(clientFlx3);
+            clientFlxRepository.save(clientFlx1);
+            clientFlxRepository.save(clientFlx2);
+            clientFlxRepository.save(clientFlx3);
 
 
             DocumentFlx documentFlx1 = new DocumentFlx(clientFlx1, "bloodtest", "http://test.com/Streching");
