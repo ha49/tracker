@@ -4,11 +4,7 @@ import com.example.demo.entity.*;
 import com.example.demo.enums.Gender;
 import com.example.demo.enums.LifeStyle;
 import com.example.demo.enums.Specialization;
-import com.example.demo.repository.ClientFlxRepository;
-import com.example.demo.repository.CoachFlxRepository;
-import com.example.demo.repository.DocumentFlxRepository;
-import com.example.demo.repository.LinkFlxRepository;
-import com.example.demo.service.TrackingFlxService;
+import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -33,7 +29,7 @@ public class TrackerApplication implements CommandLineRunner {
         private DocumentFlxRepository documentFlxRepository;
 
         @Autowired
-        private TrackingFlxService trackingFlxService;
+        private TrackingFlxRepository trackingFlxRepository;
 
         @Override
         public void run(String... args) throws Exception {
@@ -126,9 +122,9 @@ public class TrackerApplication implements CommandLineRunner {
             TrackingFlx trackingFlx3 = new TrackingFlx(clientFlx3, Date.valueOf(str), 5,  3, 2, "I am good",
                     "String coachNote3", true, "motivationalMessagePath3");
 
-            trackingFlxService.addTracking(trackingFlx1);
-            trackingFlxService.addTracking(trackingFlx2);
-            trackingFlxService.addTracking(trackingFlx3);
+            trackingFlxRepository.save(trackingFlx1);
+            trackingFlxRepository.save(trackingFlx2);
+            trackingFlxRepository.save(trackingFlx3);
         }
 
     public static void main(String[] args) {
