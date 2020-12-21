@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <title>Fitness - Create Coach</title>
+</head>
+<body>
+<form action="#" th:action="@{/user/createCoach}" method="post">
+    <div><label> Username : <input type="text" name="username"/> </label></div>
+    <div><label> Email : <input type="text" name="email"/> </label></div>
+    <div><label> Password: <input type="password" name="password"/> </label></div>
+    <div><input type="submit" value="Send"/></div>
+</form>
+</body>
+</html>
