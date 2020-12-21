@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.auth.UserFlx;
+import com.example.demo.auth.UserFlxRepository;
 import com.example.demo.entity.*;
 import com.example.demo.enums.Gender;
 import com.example.demo.enums.LifeStyle;
@@ -30,6 +32,9 @@ public class TrackerApplication implements CommandLineRunner {
 
         @Autowired
         private TrackingFlxRepository trackingFlxRepository;
+
+        @Autowired
+        private UserFlxRepository userFlxRepository;
 
         @Override
         public void run(String... args) throws Exception {
@@ -125,6 +130,11 @@ public class TrackerApplication implements CommandLineRunner {
             trackingFlxRepository.save(trackingFlx1);
             trackingFlxRepository.save(trackingFlx2);
             trackingFlxRepository.save(trackingFlx3);
+
+            UserFlx userFlx1=new UserFlx("tom", "123","tom@email.com");
+            UserFlx userFlx2=new UserFlx("sam", "123","sam@email.com");
+            UserFlx userFlx3=new UserFlx("gil", "123","gil@email.com");
+            userFlxRepository.save(userFlx1);
         }
 
     public static void main(String[] args) {
