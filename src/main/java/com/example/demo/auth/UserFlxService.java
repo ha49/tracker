@@ -34,7 +34,7 @@ public class UserFlxService {
 
         userFlx.setPassword(passwordEncoder.encode(userFlx.getPassword()));
         authGroupRepository.save(new AuthGroup(userFlx.getUsername(), "USER"));
-        //        authGroupRepository.save(new AuthGroup(userFlx.getUsername(), "ADMIN"));
+        authGroupRepository.save(new AuthGroup(userFlx.getUsername(), "ADMIN"));
         return userFlxRepository.save(userFlx);
     }
 

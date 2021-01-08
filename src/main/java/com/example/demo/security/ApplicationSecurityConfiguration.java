@@ -53,6 +53,8 @@ public class ApplicationSecurityConfiguration
                 .antMatchers("/",
                         "/home","/application", "/user/createUser", "/user/createCoach")
                 .permitAll()
+                .antMatchers("/admin", "/user/findall").hasAnyRole("ADMIN")
+                .antMatchers("coach").hasRole("COACH")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

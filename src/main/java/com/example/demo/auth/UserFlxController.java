@@ -43,7 +43,7 @@ public class UserFlxController {
     }
 
     @GetMapping("/findall")
-    //    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public Iterable<UserFlx> findAllUsers() {
         return userFlxService.findAllUsers();
     }
