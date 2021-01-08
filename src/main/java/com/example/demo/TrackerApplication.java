@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.auth.UserFlx;
-import com.example.demo.auth.UserFlxRepository;
 import com.example.demo.entity.*;
 import com.example.demo.enums.Gender;
 import com.example.demo.enums.LifeStyle;
@@ -32,9 +30,11 @@ public class TrackerApplication implements CommandLineRunner {
 
         @Autowired
         private TrackingFlxRepository trackingFlxRepository;
-
-        @Autowired
-        private UserFlxRepository userFlxRepository;
+//
+//        @Autowired
+//        private UserFlxRepository userFlxRepository;
+//        @Autowired
+//        private AuthGroupRepository authGroupRepository;
 
         @Override
         public void run(String... args) throws Exception {
@@ -63,28 +63,28 @@ public class TrackerApplication implements CommandLineRunner {
                 linkFlxRepository.save(linkFlx);
             }
 
-/*
-        for (int i = 1; i < 50; i++) {
-            //Date registerDate = Date.valueOf("02/11/2020");
-            ClientFlx clientFlx  = new ClientFlx(
-                    "ClientFirstName_" + i,
-                    "Surname_"+i,
-                    50+i*2,
-                    160+i,
-                    "email_"+i+"@mail.com",
-                    "00000"+i,
-                    "diet_"+i,
-                    Date.valueOf(str),
-                    null,
-                    null,
-                    coachFlx1 );
-            clientFlxRepository.save(clientFlx);
-        }
+//
+//        for (int i = 1; i < 50; i++) {
+//            //Date registerDate = Date.valueOf("02/11/2020");
+//            ClientFlx clientFlx  = new ClientFlx(
+//                    "ClientFirstName_" + i,
+//                    "Surname_"+i,
+//                    50+i*2,
+//                    160+i,
+//                    "email_"+i+"@mail.com",
+//                    "00000"+i,
+//                    "diet_"+i,
+//                    Date.valueOf(str),
+//                    null,
+//                    null,
+//                    coachFlx1 );
+//            clientFlxRepository.save(clientFlx);
+//        }
 
-        for (int i = 1; i < 10; i++) {
-            ClientFlx clientFlx = new ClientFlx("ClientFirstName_" + i, "Surname_"+i, 50+i*2, 160+i, "email_"+i+"@mail.com", "00000"+i, "diet_"+i, Date.valueOf(str), i%2==0?Gender.MALE:Gender.FEMALE, i%2==0? LifeStyle.ACTIVE:LifeStyle.SLOW,coachFlx2 );
-            clientFlxRepository.save(clientFlx);
-        }*/
+//        for (int i = 1; i < 10; i++) {
+//            ClientFlx clientFlx = new ClientFlx("ClientFirstName_" + i, "Surname_"+i, 50+i*2, 160+i, "email_"+i+"@mail.com", "00000"+i, "diet_"+i, Date.valueOf(str), i%2==0? Gender.MALE:Gender.FEMALE, i%2==0? LifeStyle.ACTIVE:LifeStyle.SLOW,coachFlx2 );
+//            clientFlxRepository.save(clientFlx);
+//        }
 
             ClientFlx clientFlx1 = new ClientFlx(
                     "Ben", "Ben", 76,
@@ -131,13 +131,15 @@ public class TrackerApplication implements CommandLineRunner {
             trackingFlxRepository.save(trackingFlx2);
             trackingFlxRepository.save(trackingFlx3);
 
-            UserFlx userFlx1=new UserFlx("tom", "123","tom@email.com");
-            UserFlx userFlx2=new UserFlx("sam", "123","sam@email.com");
-            UserFlx userFlx3=new UserFlx("gil", "123","gil@email.com");
-            userFlxRepository.save(userFlx1);
-        }
+//            UserFlx userFlx1=new UserFlx("tom", "$2a$09$RWNZYTvcXsYmcg/amv/4zOv8EW3dAqMlzO5Wp7Zmjgo2UFEgpObxq","tom@email.com");
+//            UserFlx userFlx2=new UserFlx("sam", "$2a$09$RWNZYTvcXsYmcg/amv/4zOv8EW3dAqMlzO5Wp7Zmjgo2UFEgpObxq","sam@email.com");
+//            UserFlx userFlx3=new UserFlx("gil", "$2a$09$RWNZYTvcXsYmcg/amv/4zOv8EW3dAqMlzO5Wp7Zmjgo2UFEgpObxq","gil@email.com");
+//            userFlxRepository.save(userFlx1);
+//            userFlxRepository.save(userFlx2);
+//            userFlxRepository.save(userFlx3);
 
-    public static void main(String[] args) {
+        }
+   public static void main(String[] args) {
         SpringApplication.run(TrackerApplication.class, args);
     }
 

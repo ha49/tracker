@@ -9,7 +9,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
+import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -24,10 +26,18 @@ public class ApplicationSecurityConfiguration
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userFlxDetailsService);
-        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
-//        provider.setAuthoritiesMapper(authoritiesMapper());
+        provider.setPasswordEncoder(new BCryptPasswordEncoder());
+         provider.setAuthoritiesMapper(authoritiesMapper());
         return provider;
 
+    }
+
+    @Bean
+    public GrantedAuthoritiesMapper authoritiesMapper(){
+        SimpleAuthorityMapper authorityMapper=new SimpleAuthorityMapper();
+        authorityMapper.setConvertToLowerCase(true);
+        authorityMapper.setDefaultAuthority("USER");
+        return authorityMapper;
     }
 
     @Override
@@ -40,12 +50,21 @@ public class ApplicationSecurityConfiguration
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/index", "/css/*", "/js/*")
+                .antMatchers("/",
+                        "/home","/application", "/user/createUser", "/user/createCoach")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic();
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .permitAll();
     }
+
 
 
 //    @Bean

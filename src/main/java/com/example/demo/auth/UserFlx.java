@@ -20,7 +20,6 @@ public class UserFlx {
 
     public UserFlx(@NotEmpty String username,  String password, String email) {
         this.username = username;
-
         this.password = password;
         this.email = email;
     }
