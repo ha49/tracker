@@ -1,21 +1,16 @@
 package com.example.demo;
 
-import com.example.demo.entity.*;
-import com.example.demo.enums.Gender;
-import com.example.demo.enums.LifeStyle;
-import com.example.demo.enums.Specialization;
-import com.example.demo.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
-
 @SpringBootApplication
-public class TrackerApplication implements CommandLineRunner {
+public class TrackerApplication {
+
+     /*
+
+        implements CommandLineRunner {
 
 
         @Autowired
@@ -141,7 +136,7 @@ public class TrackerApplication implements CommandLineRunner {
 //            userFlxRepository.save(userFlx3);
 
         }
-   public static void main(String[] args) {
+*/   public static void main(String[] args) {
         SpringApplication.run(TrackerApplication.class, args);
     }
 
