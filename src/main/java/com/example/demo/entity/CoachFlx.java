@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.auth.UserFlx;
 import com.example.demo.enums.Specialization;
 
 import javax.persistence.*;
@@ -16,21 +17,26 @@ public class CoachFlx {
     private String lastName;
     @Column(name = "specialization")
     private Specialization specialization;
-    @Column(name = "email")
-    private String email;
+//    @Column(name = "email")
+//    private String email;
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToOne
+    private UserFlx userFlx;
 
     /*@OneToMany(mappedBy = "Coach", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Links> linksSet  = new HashSet<>();*/
 
-    public CoachFlx( String firstName, String lastName, Specialization specialization, String email, String phoneNumber) {
+    public CoachFlx( String firstName, String lastName, Specialization specialization,  String phoneNumber, UserFlx userFlx) {
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.specialization = specialization;
-        this.email = email;
+
         this.phoneNumber = phoneNumber;
+        this.userFlx=userFlx;
+
     }
 
     public CoachFlx() {
@@ -68,13 +74,8 @@ public class CoachFlx {
         this.specialization = specialization;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -82,5 +83,13 @@ public class CoachFlx {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public UserFlx getUserFlx() {
+        return userFlx;
+    }
+
+    public void setUserFlx(UserFlx userFlx) {
+        this.userFlx = userFlx;
     }
 }

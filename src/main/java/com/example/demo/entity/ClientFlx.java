@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.auth.UserFlx;
 import com.example.demo.enums.Gender;
 import com.example.demo.enums.LifeStyle;
 
@@ -31,8 +32,8 @@ public class ClientFlx {
     @Column(name = "height")
     private int height;
 
-    @Column(name = "email")
-    private String email;
+//    @Column(name = "email")
+//    private String email;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -60,18 +61,24 @@ public class ClientFlx {
     @JoinColumn(name = "coachId")
     private CoachFlx coachFlx;
 
-    public ClientFlx(@NotEmpty String firstName, @NotEmpty String lastName, double weight, int height, String email, String phoneNumber, String diet, Date registrationDate, Gender gender, LifeStyle lifeStyle, CoachFlx coachFlx) {
+    @OneToOne
+    private UserFlx userFlx;
+
+    public ClientFlx(@NotEmpty String firstName, @NotEmpty String lastName, double weight, int height,
+                     String phoneNumber, String diet, Date registrationDate, Gender gender, LifeStyle lifeStyle,
+                     CoachFlx coachFlx, UserFlx userFlx) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.weight = weight;
         this.height = height;
-        this.email = email;
+
         this.phoneNumber = phoneNumber;
         this.diet = diet;
         this.registrationDate = registrationDate;
         this.gender = gender;
         this.lifeStyle = lifeStyle;
         this.coachFlx = coachFlx;
+        this.userFlx=userFlx;
     }
 
     public ClientFlx(){
@@ -126,14 +133,6 @@ public class ClientFlx {
         this.height = height;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -174,4 +173,11 @@ public class ClientFlx {
         this.lifeStyle = lifeStyle;
     }
 
+    public UserFlx getUserFlx() {
+        return userFlx;
+    }
+
+    public void setUserFlx(UserFlx userFlx) {
+        this.userFlx = userFlx;
+    }
 }

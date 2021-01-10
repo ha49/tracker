@@ -1,6 +1,7 @@
 package com.example.demo.auth;
 
 
+import com.example.demo.entity.CoachFlx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,14 +34,28 @@ public class UserFlxController {
 
     @PostMapping("/createCoach")
     //    @PreAuthorize("hasRole('ADMIN')")
-    public UserFlx createCoach(@RequestBody UserFlx userFlx) {
+    public UserFlx createCoach(@RequestBody CoachFlx coachFlx) {
         //           logger.trace("Vi loggar på TRACE-nivå");
         //           logger.debug("Vi loggar på DEBUG-nivå");
-        logger.info("createCoach() was called with username: " + userFlx.getUsername());
+        logger.info("createCoach() was called with username: " + coachFlx.getUserFlx().getUsername());
         //           logger.warn("Vi loggar på WARN-nivå");
         //           logger.error("Vi loggar på ERROR-nivå");
-        return userFlxService.createCoach(userFlx);
+        return userFlxService.createCoach(coachFlx);
     }
+
+
+    @PostMapping("/createAdmin")
+    //    @PreAuthorize("hasRole('ADMIN')")
+    public UserFlx createAdmin(@RequestBody UserFlx userFlx) {
+        //           logger.trace("Vi loggar på TRACE-nivå");
+        //           logger.debug("Vi loggar på DEBUG-nivå");
+        logger.info("createAdmin() was called with username: " + userFlx.getUsername());
+        //           logger.warn("Vi loggar på WARN-nivå");
+        //           logger.error("Vi loggar på ERROR-nivå");
+        return userFlxService.createAdmin(userFlx);
+    }
+
+
 
     @GetMapping("/findall")
 //    @PreAuthorize("hasRole('ADMIN')")

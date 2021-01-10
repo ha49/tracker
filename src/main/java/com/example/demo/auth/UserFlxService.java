@@ -1,6 +1,8 @@
 package com.example.demo.auth;
 
 
+import com.example.demo.entity.CoachFlx;
+import com.example.demo.repository.CoachFlxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,12 +17,18 @@ public class UserFlxService {
     @Autowired
     AuthGroupRepository authGroupRepository;
 
+    @Autowired
+    CoachFlxRepository coachFlxRepository;
+
     private UserFlxRepository userFlxRepository;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     // Constructor injection
-    public UserFlxService(UserFlxRepository userFlxRepository, TestScopes testScopes) {
+    public UserFlxService(UserFlxRepository userFlxRepository,CoachFlxRepository coachFlxRepository,
+                          TestScopes testScopes) {
+
         this.userFlxRepository = userFlxRepository;
+        this.coachFlxRepository=coachFlxRepository;
     }
 
     // Setter injection
@@ -34,14 +42,28 @@ public class UserFlxService {
 
         userFlx.setPassword(passwordEncoder.encode(userFlx.getPassword()));
         authGroupRepository.save(new AuthGroup(userFlx.getUsername(), "USER"));
+//        authGroupRepository.save(new AuthGroup(userFlx.getUsername(), "ADMIN"));
+        return userFlxRepository.save(userFlx);
+    }
+
+    public UserFlx createAdmin(UserFlx userFlx) {
+
+        userFlx.setPassword(passwordEncoder.encode(userFlx.getPassword()));
         authGroupRepository.save(new AuthGroup(userFlx.getUsername(), "ADMIN"));
         return userFlxRepository.save(userFlx);
     }
 
-    public UserFlx createCoach(UserFlx userFlx){
-        userFlx.setPassword(passwordEncoder.encode(userFlx.getPassword()));
-        authGroupRepository.save(new AuthGroup(userFlx.getUsername(), "COACH"));
-        return userFlxRepository.save(userFlx);
+    public UserFlx createCoach(CoachFlx coachFlx){
+
+        UserFlx newUser= coachFlx.getUserFlx();
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        UserFlx savedUser=userFlxRepository.save(newUser);
+        authGroupRepository.save(new AuthGroup(newUser.getUsername(), "COACH"));
+
+        coachFlx.setUserFlx(savedUser);
+
+        coachFlxRepository.save(coachFlx);
+        return savedUser;
     }
 
 

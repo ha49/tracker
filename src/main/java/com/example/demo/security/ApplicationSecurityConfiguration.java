@@ -51,7 +51,7 @@ public class ApplicationSecurityConfiguration
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/",
-                        "/home","/application", "/user/createUser", "/user/createCoach")
+                        "/home", "/user/createUser", "/user/createCoach")
                 .permitAll()
                 .antMatchers("/admin", "/user/findall").hasAnyRole("ADMIN")
                 .antMatchers("coach").hasRole("COACH")
