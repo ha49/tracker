@@ -1,6 +1,7 @@
 package com.example.demo.auth;
 
 
+import com.example.demo.entity.ClientFlx;
 import com.example.demo.entity.CoachFlx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,16 @@ public class UserFlxController {
         //           logger.warn("Vi loggar på WARN-nivå");
         //           logger.error("Vi loggar på ERROR-nivå");
         return userFlxService.createCoach(coachFlx);
+    }
+    @PostMapping("/createClient")
+    //    @PreAuthorize("hasRole('ADMIN')")
+    public UserFlx createClient(@RequestBody ClientFlx clientFlx) {
+        //           logger.trace("Vi loggar på TRACE-nivå");
+        //           logger.debug("Vi loggar på DEBUG-nivå");
+        logger.info("createCoach() was called with username: " + clientFlx.getUserFlx().getUsername());
+        //           logger.warn("Vi loggar på WARN-nivå");
+        //           logger.error("Vi loggar på ERROR-nivå");
+        return userFlxService.createClient(clientFlx);
     }
 
 

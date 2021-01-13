@@ -1,7 +1,9 @@
 package com.example.demo.auth;
 
 
+import com.example.demo.entity.ClientFlx;
 import com.example.demo.entity.CoachFlx;
+import com.example.demo.repository.ClientFlxRepository;
 import com.example.demo.repository.CoachFlxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,15 +22,21 @@ public class UserFlxService {
     @Autowired
     CoachFlxRepository coachFlxRepository;
 
+    @Autowired
+    ClientFlxRepository clientFlxRepository;
+
     private UserFlxRepository userFlxRepository;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     // Constructor injection
-    public UserFlxService(UserFlxRepository userFlxRepository,CoachFlxRepository coachFlxRepository,
+    public UserFlxService(UserFlxRepository userFlxRepository,
+                          CoachFlxRepository coachFlxRepository,
+                          ClientFlxRepository clientFlxRepository,
                           TestScopes testScopes) {
 
         this.userFlxRepository = userFlxRepository;
         this.coachFlxRepository=coachFlxRepository;
+        this.clientFlxRepository=clientFlxRepository;
     }
 
     // Setter injection
@@ -63,6 +71,20 @@ public class UserFlxService {
         coachFlx.setUserFlx(savedUser);
 
         coachFlxRepository.save(coachFlx);
+        return savedUser;
+    }
+
+
+    public UserFlx createClient(ClientFlx clientFlx){
+
+        UserFlx newUser= clientFlx.getUserFlx();
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        UserFlx savedUser=userFlxRepository.save(newUser);
+        authGroupRepository.save(new AuthGroup(newUser.getUsername(), "CLIENT"));
+
+        clientFlx.setUserFlx(savedUser);
+
+        clientFlxRepository.save(clientFlx);
         return savedUser;
     }
 
