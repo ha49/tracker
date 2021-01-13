@@ -34,9 +34,6 @@ public class UserFlxPrincipal implements UserDetails {
     }
 
 
-
-
-
     @Override
     public String getPassword() {
         return this.userFlx.getPassword();

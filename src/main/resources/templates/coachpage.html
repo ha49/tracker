@@ -2,6 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
 >
 <head>
+    <title>Admin - Welcome</title>
+</head>
+<body>
+<h1 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h1>
+<p>This is the coach console and restricted to coaches.</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>
+
+
+
+<!--
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
     <title>Fitness - Login</title>
 </head>
 <body>
@@ -28,3 +46,4 @@
     </body>
     </html>
 </div>
+-->

@@ -6,6 +6,7 @@ import com.example.demo.repository.CoachFlxRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
@@ -37,6 +38,7 @@ public class ClientFlxController {
 
     //    GET ALL
     @GetMapping("/getall")
+    @PreAuthorize("hasRole('CLIENT')")
     public Iterable<ClientFlx> getAllClient(){
         LOGGER.info("client/getall ☺");
         return clientFlxRepository.findAll();

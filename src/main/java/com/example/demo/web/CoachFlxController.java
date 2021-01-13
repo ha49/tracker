@@ -8,6 +8,7 @@ import com.example.demo.repository.CoachFlxRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
@@ -50,13 +51,15 @@ public class CoachFlxController {
 
         return memberships;*/
 
-        Iterable<ClientFlx> clients = membershipFlxRepository.findClientFlxByStatusAndCoachIdParams("Active",coachId);
+        Iterable<ClientFlx> clients = membershipFlxRepository.findClientFlxByStatusAndCoachIdParams(coachId);
+//        Iterable<ClientFlx> clients = membershipFlxRepository.findClientFlxByStatusAndCoachIdParams("Active",coachId);
         return clients;
 
     }
 
     //    GET ALL
     @GetMapping("/getall")
+    @PreAuthorize("hasRole('COACH')")
     public Iterable<CoachFlx> getAllCoaches(){
         LOGGER.info("coach/getall ☺");
 

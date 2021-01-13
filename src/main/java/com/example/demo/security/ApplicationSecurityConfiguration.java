@@ -13,6 +13,10 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
+
+
+
 @Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfiguration
@@ -50,11 +54,12 @@ public class ApplicationSecurityConfiguration
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/",
-                        "/home", "/user/createUser", "/user/createCoach")
-                .permitAll()
-                .antMatchers("/admin", "/user/findall").hasAnyRole("ADMIN")
-                .antMatchers("coach").hasRole("COACH")
+
+//                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/coach/**").hasRole("coach")
+                .antMatchers("/client/**").hasRole("client")
+
+                .antMatchers("/","static/css", "static/js").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

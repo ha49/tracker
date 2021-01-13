@@ -5,10 +5,9 @@
     <title>FitnessApp - Welcome</title>
 </head>
 <body>
-<h1 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h1>
-<p>Here is a lot of data that is specific to you.</p>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+<h1 th:inline="text">Welcome Dear Visitor. </h1>
+<p>You can find general information on this page. </p>
+<p>    Please login in order to access your account</p>
+
 </body>
 </html>

@@ -1,6 +1,6 @@
-package com.example.demo.enums;
-
-public enum LifeStyle {
-    SLOW,
-    ACTIVE
-}
+//package com.example.demo.enums;
+//
+//public enum LifeStyle {
+//    SLOW,
+//    ACTIVE
+//}

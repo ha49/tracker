@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/clientcoachmembership")
+@RequestMapping("/member")
 public class ClientCoachMembershipFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkFlxController.class);
 

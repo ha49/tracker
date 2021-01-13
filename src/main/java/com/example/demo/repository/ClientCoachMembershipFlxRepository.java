@@ -15,8 +15,11 @@ public interface ClientCoachMembershipFlxRepository extends CrudRepository<Clien
     Iterable<ClientCoachMembershipFlx> findByCoachFlx(CoachFlx coachFlx);
 
     @Query("SELECT cl FROM ClientFlx cl inner join ClientCoachMembershipFlx ms on ms.clientFlx.id = cl.id " +
-            " WHERE  ms.coachFlx.id = :coachId and cl.status = :status")
+
+//            " WHERE  ms.coachFlx.id = :coachId and cl.status = :status"
+
+            " WHERE  ms.coachFlx.id = :coachId ")
     Iterable<ClientFlx>  findClientFlxByStatusAndCoachIdParams(
-            @Param("status") String status,
+//            @Param("status") String status,
             @Param("coachId") Long coachId);
 }
