@@ -58,6 +58,10 @@ public class ApplicationSecurityConfiguration
 //                .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/coach/**").hasRole("coach")
                 .antMatchers("/client/**").hasRole("client")
+                .antMatchers("/clientpage").hasRole("client")
+                .antMatchers("/coachpage").hasRole("coach")
+                .antMatchers("/member/new").hasRole("client")
+                .antMatchers("/member/**").hasRole("coach")
 
                 .antMatchers("/","static/css", "static/js").permitAll()
                 .anyRequest().authenticated()
