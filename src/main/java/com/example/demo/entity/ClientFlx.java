@@ -1,12 +1,11 @@
 package com.example.demo.entity;
 
 import com.example.demo.auth.UserFlx;
-import com.example.demo.enums.Gender;
-import com.example.demo.enums.LifeStyle;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
+import java.util.Set;
 
 
 @Entity
@@ -45,10 +44,20 @@ public class ClientFlx {
     private Date registrationDate;
 
     @Column(name = "gender")
-    private Gender gender;
+    private String gender;
 
     @Column(name = "lifestyle")
-    private LifeStyle lifeStyle;
+    private String lifeStyle;
+    @Column(name = "status")
+    private String status;
+//    private LifeStyle lifeStyle;
+
+    //@OneToMany(mappedBy = "client_flx")
+    @OneToMany()
+    Set<ClientCoachMembershipFlx> memberships;
+
+    @OneToMany()
+    Set<DocumentFlx> documents;
 
     /*@OneToMany(mappedBy = "Client", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Documents> documentsSet  = new HashSet<>();
@@ -65,8 +74,8 @@ public class ClientFlx {
     private UserFlx userFlx;
 
     public ClientFlx(@NotEmpty String firstName, @NotEmpty String lastName, double weight, int height,
-                     String phoneNumber, String diet, Date registrationDate, Gender gender, LifeStyle lifeStyle,
-                     CoachFlx coachFlx, UserFlx userFlx) {
+                     String phoneNumber, String diet, Date registrationDate, String gender, String lifeStyle,
+                     String status, UserFlx userFlx) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.weight = weight;
@@ -77,7 +86,7 @@ public class ClientFlx {
         this.registrationDate = registrationDate;
         this.gender = gender;
         this.lifeStyle = lifeStyle;
-        this.coachFlx = coachFlx;
+        this.status = status;
         this.userFlx=userFlx;
     }
 
@@ -157,19 +166,19 @@ public class ClientFlx {
         this.registrationDate = registrationDate;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public LifeStyle getLifeStyle() {
+    public String getLifeStyle() {
         return lifeStyle;
     }
 
-    public void setLifeStyle(LifeStyle lifeStyle) {
+    public void setLifeStyle(String lifeStyle) {
         this.lifeStyle = lifeStyle;
     }
 
@@ -179,5 +188,21 @@ public class ClientFlx {
 
     public void setUserFlx(UserFlx userFlx) {
         this.userFlx = userFlx;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Set<ClientCoachMembershipFlx> getMemberships() {
+        return memberships;
+    }
+
+    public void setMemberships(Set<ClientCoachMembershipFlx> memberships) {
+        this.memberships = memberships;
     }
 }

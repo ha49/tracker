@@ -1,7 +1,6 @@
 package com.example.demo.web;
 
 import com.example.demo.entity.ClientFlx;
-import com.example.demo.entity.CoachFlx;
 import com.example.demo.repository.ClientFlxRepository;
 import com.example.demo.repository.CoachFlxRepository;
 import org.slf4j.Logger;
@@ -43,24 +42,14 @@ public class ClientFlxController {
         return clientFlxRepository.findAll();
     }
 
-    // GET CLIENTS OF A COACH
-    @GetMapping("/getforcoach/{coachId}")
-    public Iterable<ClientFlx> getAllClient4Coach(@PathVariable long coachId){
-        LOGGER.info("client/getforcoach/"+coachId + " ☺");
 
-        CoachFlx coachFlx = coachFlxRepository.findById(coachId).orElseThrow(()->
-                new NoSuchElementException("Coach with id "+ coachId+ " does not exist " ));
-
-        Iterable<ClientFlx> clients = clientFlxRepository.findByCoachFlx(coachFlx);
-        return clients;
-    }
 
     // ADD NEW
     @PostMapping("/new")
     public ClientFlx addNewClient(@RequestBody ClientFlx clientFlx){
 
-        CoachFlx coachFlx = coachFlxRepository.findById(clientFlx.getCoachFlx().getId()).orElseThrow(()->
-                new RuntimeException("Coach does not exist: " + clientFlx.getCoachFlx().getId()));
+//        CoachFlx coachFlx = coachFlxRepository.findById(clientFlx.getCoachFlx().getId()).orElseThrow(()->
+//                new RuntimeException("Coach does not exist: " + clientFlx.getCoachFlx().getId()));
 
         LOGGER.info("client/new/ ☺");
         return clientFlxRepository.save(clientFlx);

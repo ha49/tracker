@@ -2,7 +2,6 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
-
 @Entity
 public class TrackingFlx {
 
@@ -10,10 +9,16 @@ public class TrackingFlx {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn
     private ClientFlx clientFlx;
+    @ManyToOne
+    @JoinColumn
+    private CoachFlx coachFlx;*/
 
+    @ManyToOne
+    @JoinColumn
+    private ClientCoachMembershipFlx clientCoachMembershipFlx;
 
     @Column(name = "trackingDate")
     private Date trackingDate;
@@ -29,7 +34,7 @@ public class TrackingFlx {
 
     }
 
-    public TrackingFlx(ClientFlx clientFlx, Date trackingDate, int dietRate,
+    public TrackingFlx(ClientCoachMembershipFlx clientCoachMembershipFlx, Date trackingDate, int dietRate,
                        int exerciseRate, int mode, String clientNote,
                        String coachNote, boolean motivationalMessageFlag, String motivationalMessagePath) {
         this.trackingDate = trackingDate;
@@ -40,7 +45,7 @@ public class TrackingFlx {
         this.coachNote = coachNote;
         this.motivationalMessageFlag = motivationalMessageFlag;
         this.motivationalMessagePath = motivationalMessagePath;
-        this.clientFlx = clientFlx;
+        this.clientCoachMembershipFlx = clientCoachMembershipFlx;
     }
 
     public Date getTrackingDate() {
@@ -107,12 +112,12 @@ public class TrackingFlx {
         this.motivationalMessagePath = motivationalMessagePath;
     }
 
-    public ClientFlx getClientFlx() {
-        return clientFlx;
+    public ClientCoachMembershipFlx getClientCoachMembershipFlx() {
+        return clientCoachMembershipFlx;
     }
 
-    public void setClientFlx(ClientFlx clientFlx) {
-        this.clientFlx = clientFlx;
+    public void setClientCoachMembershipFlx(ClientCoachMembershipFlx membershipFlx) {
+        this.clientCoachMembershipFlx = membershipFlx;
     }
 
     public long getId() {

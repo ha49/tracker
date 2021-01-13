@@ -1,9 +1,9 @@
 package com.example.demo.entity;
 
 import com.example.demo.auth.UserFlx;
-import com.example.demo.enums.Specialization;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class CoachFlx {
@@ -16,11 +16,18 @@ public class CoachFlx {
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "specialization")
-    private Specialization specialization;
-//    @Column(name = "email")
-//    private String email;
+    private String specialization;
+
     @Column(name = "phone_number")
     private String phoneNumber;
+
+
+    //@OneToMany(mappedBy = "coach_flx")
+    @OneToMany()
+    Set<ClientCoachMembershipFlx> memberships;
+
+    @OneToMany()
+    Set<LinkFlx> links;
 
     @OneToOne
     private UserFlx userFlx;
@@ -28,7 +35,7 @@ public class CoachFlx {
     /*@OneToMany(mappedBy = "Coach", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Links> linksSet  = new HashSet<>();*/
 
-    public CoachFlx( String firstName, String lastName, Specialization specialization,  String phoneNumber, UserFlx userFlx) {
+    public CoachFlx( String firstName, String lastName, String specialization,  String phoneNumber, UserFlx userFlx) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -66,11 +73,11 @@ public class CoachFlx {
         this.lastName = lastName;
     }
 
-    public Specialization getSpecialization() {
+    public String getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(Specialization specialization) {
+    public void setSpecialization(String specialization) {
         this.specialization = specialization;
     }
 
@@ -91,5 +98,13 @@ public class CoachFlx {
 
     public void setUserFlx(UserFlx userFlx) {
         this.userFlx = userFlx;
+    }
+
+    public Set<ClientCoachMembershipFlx> getMemberships() {
+        return memberships;
+    }
+
+    public void setMemberships(Set<ClientCoachMembershipFlx> memberships) {
+        this.memberships = memberships;
     }
 }

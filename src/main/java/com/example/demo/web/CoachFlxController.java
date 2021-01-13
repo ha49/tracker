@@ -1,7 +1,9 @@
 package com.example.demo.web;
 
 
+import com.example.demo.entity.ClientFlx;
 import com.example.demo.entity.CoachFlx;
+import com.example.demo.repository.ClientCoachMembershipFlxRepository;
 import com.example.demo.repository.CoachFlxRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,10 +18,14 @@ public class CoachFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CoachFlxController.class);
 
     private CoachFlxRepository coachFlxRepository;
+    private ClientCoachMembershipFlxRepository membershipFlxRepository;
 
-    public CoachFlxController(CoachFlxRepository coachFlxRepository) {
+    public CoachFlxController(CoachFlxRepository coachFlxRepository,
+                              ClientCoachMembershipFlxRepository membershipFlxRepository) {
         this.coachFlxRepository = coachFlxRepository;
+        this.membershipFlxRepository = membershipFlxRepository;
     }
+
 
 
     //    GET ONE
@@ -32,6 +38,23 @@ public class CoachFlxController {
         );
     }
 
+    // GET CLIENTS FOR COACH
+    @GetMapping("/getclients/{coachId}")
+    public Iterable<ClientFlx> getClients(@PathVariable long coachId){
+        LOGGER.info("coach/getclients/"+coachId + " ☺");
+
+        CoachFlx coachFlx = coachFlxRepository.findById(coachId).orElseThrow(()->
+                new NoSuchElementException("Coach with id "+ coachId+ " does not exist " ));
+
+       /* Iterable<ClientCoachMembershipFlx> memberships = membershipFlxRepository.findByCoachFlx(coachFlx);
+
+        return memberships;*/
+
+        Iterable<ClientFlx> clients = membershipFlxRepository.findClientFlxByStatusAndCoachIdParams("Active",coachId);
+        return clients;
+
+    }
+
     //    GET ALL
     @GetMapping("/getall")
     public Iterable<CoachFlx> getAllCoaches(){
@@ -41,6 +64,8 @@ public class CoachFlxController {
 
 
     }
+
+
 
     // ADD NEW
     @PostMapping("/new")

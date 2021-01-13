@@ -1,15 +1,16 @@
 package com.example.demo.web;
 
 
-import com.example.demo.entity.ClientFlx;
+import com.example.demo.entity.ClientCoachMembershipFlx;
 import com.example.demo.entity.TrackingFlx;
-import com.example.demo.repository.ClientFlxRepository;
+import com.example.demo.repository.ClientCoachMembershipFlxRepository;
 import com.example.demo.repository.TrackingFlxRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -17,12 +18,14 @@ import java.util.NoSuchElementException;
 public class TrackingFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrackingFlxController.class);
     private TrackingFlxRepository trackingFlxRepository;
-    private ClientFlxRepository clientFlxRepository;
+    private ClientCoachMembershipFlxRepository membershipRepository;
+    //private ClientFlxRepository clientFlxRepository;
+    //private CoachFlxRepository coachFlxRepository;
 
     public TrackingFlxController(TrackingFlxRepository trackingFlxRepository,
-                                 ClientFlxRepository clientFlxRepository) {
+                                 ClientCoachMembershipFlxRepository membershipRepository) {
         this.trackingFlxRepository = trackingFlxRepository;
-        this.clientFlxRepository = clientFlxRepository;
+        this.membershipRepository = membershipRepository;
     }
 
     @GetMapping("/getall")
@@ -31,15 +34,22 @@ public class TrackingFlxController {
         return trackingFlxRepository.findAll();
     }
 
-    @GetMapping("/getforclient/{clientId}")
-    public Iterable<TrackingFlx> getAllTrackings4Client(@PathVariable long clientId){
-        LOGGER.info("tracking/getforclient/");
+    @GetMapping("/getbydate/{date}")
+    public Iterable<TrackingFlx> getTrackingByDate(@PathVariable Date date){
+        LOGGER.info("tracking/getbydate ☺");
+        Iterable<TrackingFlx> trackings = trackingFlxRepository.findByTrackingDate(date);
+        return trackings;
+    }
 
+    //GET FOR MEMBERSHIP
+    @GetMapping("/getformembership/{membershipId}")
+    public Iterable<TrackingFlx> getAllTrackings4Membership(@PathVariable long membershipId){
+        LOGGER.info("tracking/getformembership/");
 
-        ClientFlx clientFlx = clientFlxRepository.findById(clientId).orElseThrow(()->
-                new NoSuchElementException("Coach with id "+ clientId+ " does not exist " ));
+        ClientCoachMembershipFlx clientCoachMembershipFlx = membershipRepository.findById(membershipId).orElseThrow(()->
+                new NoSuchElementException("Coach with id " + membershipId + " does not exist " ));
 
-        Iterable<TrackingFlx> tracking= trackingFlxRepository.findByClientFlx(clientFlx);
+        Iterable<TrackingFlx> tracking= trackingFlxRepository.findByClientCoachMembershipFlx(membershipId);
         return tracking;
 
 
@@ -49,15 +59,26 @@ public class TrackingFlxController {
     @PostMapping("/new")
     public TrackingFlx addNewTracking(@RequestBody TrackingFlx trackingFlx){
 
-        clientFlxRepository.findById(trackingFlx.getClientFlx().getId()).orElseThrow(()->
-                new NoSuchElementException( "Client with id "+ trackingFlx.getClientFlx().getId()+ " does not exist "  ));
+        membershipRepository.findById(trackingFlx.getClientCoachMembershipFlx().getId()).orElseThrow(()->
+                new NoSuchElementException( "Membership with id "+ trackingFlx.getClientCoachMembershipFlx().getId()+ " does not exist "  ));
 
         LOGGER.info("tracking/new/ ☺");
         return trackingFlxRepository.save(trackingFlx);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @PutMapping("/update/{id}")
+    public void updateTracking(@RequestBody TrackingFlx trackingFlx, @PathVariable Long id){
+        TrackingFlx foundTracking=verifyTracking(id);
 
+        foundTracking.setClientNote(trackingFlx.getClientNote());
+        foundTracking.setCoachNote(trackingFlx.getCoachNote());
+        foundTracking.setDietRate(trackingFlx.getDietRate());
+        foundTracking.setExerciseRate(trackingFlx.getExerciseRate());
+        foundTracking.setMode(trackingFlx.getMode());
+        trackingFlxRepository.save(foundTracking);
+    }
+
+    @DeleteMapping("/delete/{id}")
     public void deleteTracking(@PathVariable long id){
         TrackingFlx foundTracking=verifyTracking(id);
         trackingFlxRepository.delete(foundTracking);
