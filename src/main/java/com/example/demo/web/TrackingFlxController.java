@@ -29,13 +29,13 @@ public class TrackingFlxController {
     }
 
     @GetMapping("/getall")
-    public Iterable<TrackingFlx> getAllTrackings(){
+    public Iterable<TrackingFlx> getAllTrackings() {
         LOGGER.info("tracking/getall ☺");
         return trackingFlxRepository.findAll();
     }
 
     @GetMapping("/getbydate/{date}")
-    public Iterable<TrackingFlx> getTrackingByDate(@PathVariable Date date){
+    public Iterable<TrackingFlx> getTrackingByDate(@PathVariable Date date) {
         LOGGER.info("tracking/getbydate ☺");
         Iterable<TrackingFlx> trackings = trackingFlxRepository.findByTrackingDate(date);
         return trackings;
@@ -43,13 +43,13 @@ public class TrackingFlxController {
 
     //GET FOR MEMBERSHIP
     @GetMapping("/getformembership/{membershipId}")
-    public Iterable<TrackingFlx> getAllTrackings4Membership(@PathVariable long membershipId){
+    public Iterable<TrackingFlx> getAllTrackings4Membership(@PathVariable long membershipId) {
         LOGGER.info("tracking/getformembership/");
 
-        ClientCoachMembershipFlx clientCoachMembershipFlx = membershipRepository.findById(membershipId).orElseThrow(()->
-                new NoSuchElementException("Coach with id " + membershipId + " does not exist " ));
+        ClientCoachMembershipFlx clientCoachMembershipFlx = membershipRepository.findById(membershipId).orElseThrow(() ->
+                new NoSuchElementException("Coach with id " + membershipId + " does not exist "));
 
-        Iterable<TrackingFlx> tracking= trackingFlxRepository.findByClientCoachMembershipFlx(membershipId);
+        Iterable<TrackingFlx> tracking = trackingFlxRepository.findByClientCoachMembershipFlx(membershipId);
         return tracking;
 
 
@@ -57,18 +57,18 @@ public class TrackingFlxController {
 
     // ADD NEW
     @PostMapping("/new")
-    public TrackingFlx addNewTracking(@RequestBody TrackingFlx trackingFlx){
+    public TrackingFlx addNewTracking(@RequestBody TrackingFlx trackingFlx) {
 
-        membershipRepository.findById(trackingFlx.getClientCoachMembershipFlx().getId()).orElseThrow(()->
-                new NoSuchElementException( "Membership with id "+ trackingFlx.getClientCoachMembershipFlx().getId()+ " does not exist "  ));
+        membershipRepository.findById(trackingFlx.getClientCoachMembershipFlx().getId()).orElseThrow(() ->
+                new NoSuchElementException("Membership with id " + trackingFlx.getClientCoachMembershipFlx().getId() + " does not exist "));
 
         LOGGER.info("tracking/new/ ☺");
         return trackingFlxRepository.save(trackingFlx);
     }
 
     @PutMapping("/update/{id}")
-    public void updateTracking(@RequestBody TrackingFlx trackingFlx, @PathVariable Long id){
-        TrackingFlx foundTracking=verifyTracking(id);
+    public void updateTracking(@RequestBody TrackingFlx trackingFlx, @PathVariable Long id) {
+        TrackingFlx foundTracking = verifyTracking(id);
 
         foundTracking.setClientNote(trackingFlx.getClientNote());
         foundTracking.setCoachNote(trackingFlx.getCoachNote());
@@ -79,8 +79,8 @@ public class TrackingFlxController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteTracking(@PathVariable long id){
-        TrackingFlx foundTracking=verifyTracking(id);
+    public void deleteTracking(@PathVariable long id) {
+        TrackingFlx foundTracking = verifyTracking(id);
         trackingFlxRepository.delete(foundTracking);
     }
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface ClientFlxRepository extends CrudRepository<ClientFlx, Long> {
     ClientFlx findByLastName(String lastName);
 
-//    Iterable<ClientFlx> findByCoachFlx(CoachFlx coachFlx);
+    //    Iterable<ClientFlx> findByCoachFlx(CoachFlx coachFlx);
 
      /*
     @Query("SELECT cl FROM ClientFlx cl inner join ClientCoachMembershipFlx ms on ms.clientFlx.id = cl.id " +

@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+
 @Entity
 public class TrackingFlx {
 

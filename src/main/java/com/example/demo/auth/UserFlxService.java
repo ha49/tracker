@@ -35,8 +35,8 @@ public class UserFlxService {
                           TestScopes testScopes) {
 
         this.userFlxRepository = userFlxRepository;
-        this.coachFlxRepository=coachFlxRepository;
-        this.clientFlxRepository=clientFlxRepository;
+        this.coachFlxRepository = coachFlxRepository;
+        this.clientFlxRepository = clientFlxRepository;
     }
 
     // Setter injection
@@ -50,7 +50,7 @@ public class UserFlxService {
 
         userFlx.setPassword(passwordEncoder.encode(userFlx.getPassword()));
         authGroupRepository.save(new AuthGroup(userFlx.getUsername(), "USER"));
-//        authGroupRepository.save(new AuthGroup(userFlx.getUsername(), "ADMIN"));
+        //        authGroupRepository.save(new AuthGroup(userFlx.getUsername(), "ADMIN"));
         return userFlxRepository.save(userFlx);
     }
 
@@ -61,11 +61,11 @@ public class UserFlxService {
         return userFlxRepository.save(userFlx);
     }
 
-    public UserFlx createCoach(CoachFlx coachFlx){
+    public UserFlx createCoach(CoachFlx coachFlx) {
 
-        UserFlx newUser= coachFlx.getUserFlx();
+        UserFlx newUser = coachFlx.getUserFlx();
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-        UserFlx savedUser=userFlxRepository.save(newUser);
+        UserFlx savedUser = userFlxRepository.save(newUser);
         authGroupRepository.save(new AuthGroup(newUser.getUsername(), "COACH"));
 
         coachFlx.setUserFlx(savedUser);
@@ -75,11 +75,11 @@ public class UserFlxService {
     }
 
 
-    public UserFlx createClient(ClientFlx clientFlx){
+    public UserFlx createClient(ClientFlx clientFlx) {
 
-        UserFlx newUser= clientFlx.getUserFlx();
+        UserFlx newUser = clientFlx.getUserFlx();
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-        UserFlx savedUser=userFlxRepository.save(newUser);
+        UserFlx savedUser = userFlxRepository.save(newUser);
         authGroupRepository.save(new AuthGroup(newUser.getUsername(), "CLIENT"));
 
         clientFlx.setUserFlx(savedUser);

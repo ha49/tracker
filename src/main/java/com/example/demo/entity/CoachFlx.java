@@ -35,14 +35,14 @@ public class CoachFlx {
     /*@OneToMany(mappedBy = "Coach", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Links> linksSet  = new HashSet<>();*/
 
-    public CoachFlx( String firstName, String lastName, String specialization,  String phoneNumber, UserFlx userFlx) {
+    public CoachFlx(String firstName, String lastName, String specialization, String phoneNumber, UserFlx userFlx) {
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.specialization = specialization;
 
         this.phoneNumber = phoneNumber;
-        this.userFlx=userFlx;
+        this.userFlx = userFlx;
 
     }
 
@@ -80,8 +80,6 @@ public class CoachFlx {
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
     }
-
-
 
 
     public String getPhoneNumber() {

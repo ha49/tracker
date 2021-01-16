@@ -16,17 +16,16 @@ public class UserFlxPrincipal implements UserDetails {
         super();
         this.userFlx = userFlx;
         this.authGroups = authGroups;
-         }
-
+    }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (authGroups==null) {
+        if (authGroups == null) {
             return Collections.emptySet();
         }
         Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
-        authGroups.forEach(group->{
+        authGroups.forEach(group -> {
             grantedAuthorities.add(new SimpleGrantedAuthority(group.getAuthGroup()));
         });
 

@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class LinkFlx {
 
     @Id
-    @Column( name = "id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column(name = "description")
@@ -26,7 +26,7 @@ public class LinkFlx {
         this.coachFlx = coachFlx;
     }
 
-    public LinkFlx(){
+    public LinkFlx() {
     }
 
     public long getId() {

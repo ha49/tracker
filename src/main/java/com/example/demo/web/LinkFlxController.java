@@ -28,30 +28,28 @@ public class LinkFlxController {
     //    GET ONE
 
     @GetMapping("/get/{id}")
-    public LinkFlx getLink(@PathVariable long id){
-        LOGGER.info("link/get/"+id + " ☺");
+    public LinkFlx getLink(@PathVariable long id) {
+        LOGGER.info("link/get/" + id + " ☺");
 
         return linkFlxRepository.findById(id).orElseThrow(
-                ()-> new NoSuchElementException("Link with id "+ id+ " does not exist ")
+                () -> new NoSuchElementException("Link with id " + id + " does not exist ")
         );
     }
 
 
-
-
     @GetMapping("/getall")
-    public Iterable<LinkFlx> getAllLinks(){
+    public Iterable<LinkFlx> getAllLinks() {
         LOGGER.info("link/getall ☺");
         return linkFlxRepository.findAll();
     }
 
     @GetMapping("/getforcoach/{coachId}")
-    public Iterable<LinkFlx> getAllLinks4Coach(@PathVariable long coachId){
-        LOGGER.info("link/getforcoach/"+coachId + " ☺");
+    public Iterable<LinkFlx> getAllLinks4Coach(@PathVariable long coachId) {
+        LOGGER.info("link/getforcoach/" + coachId + " ☺");
 
 
-        CoachFlx coachFlx = coachFlxRepository.findById(coachId).orElseThrow(()->
-                new RuntimeException("Coach with id "+ coachId+ " does not exist "));
+        CoachFlx coachFlx = coachFlxRepository.findById(coachId).orElseThrow(() ->
+                new RuntimeException("Coach with id " + coachId + " does not exist "));
 
         Iterable<LinkFlx> links = linkFlxRepository.findByCoachFlx(coachFlx);
         return links;
@@ -59,7 +57,7 @@ public class LinkFlxController {
 
 
     @PostMapping("/new")
-    public LinkFlx addNewLink(@RequestBody LinkFlx linkFlx){
+    public LinkFlx addNewLink(@RequestBody LinkFlx linkFlx) {
         LOGGER.info("link/new/ ☺");
 
         return linkFlxRepository.save(linkFlx);
@@ -68,16 +66,16 @@ public class LinkFlxController {
 
     @DeleteMapping("/delete/{id}")
 
-    public void deleteLink(@PathVariable long id){
-        LOGGER.info("link/delete/"+id + " ☺");
-        LinkFlx foundLink=verifyLink(id);
+    public void deleteLink(@PathVariable long id) {
+        LOGGER.info("link/delete/" + id + " ☺");
+        LinkFlx foundLink = verifyLink(id);
         linkFlxRepository.delete(foundLink);
 
     }
 
     private LinkFlx verifyLink(long id) throws NoSuchElementException {
         return linkFlxRepository.findById(id).orElseThrow(() ->
-                new NoSuchElementException("Link with id "+ id+ " does not exist "));
+                new NoSuchElementException("Link with id " + id + " does not exist "));
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

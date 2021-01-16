@@ -6,20 +6,20 @@ import javax.persistence.*;
 @Table(name = "Documents")
 public class DocumentFlx {
 
-@Id
-@Column(name = "id")
-@GeneratedValue(strategy = GenerationType.AUTO)
-private long id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-@ManyToOne
-@JoinColumn(name = "clientId")
-private ClientFlx clientFlx;
+    @ManyToOne
+    @JoinColumn(name = "clientId")
+    private ClientFlx clientFlx;
 
-@Column(name = "name")
-private String name;
+    @Column(name = "name")
+    private String name;
 
-@Column(name = "path")
-private  String path;
+    @Column(name = "path")
+    private String path;
 
     public DocumentFlx() {
     }

@@ -28,31 +28,30 @@ public class CoachFlxController {
     }
 
 
-
     //    GET ONE
     @GetMapping("/get/{id}")
-    public CoachFlx getCoach(@PathVariable long id){
-        LOGGER.info("coach/get/"+id + " ☺");
+    public CoachFlx getCoach(@PathVariable long id) {
+        LOGGER.info("coach/get/" + id + " ☺");
 
         return coachFlxRepository.findById(id).orElseThrow(
-                ()-> new NoSuchElementException("Coach with id "+ id+ " does not exist ")
+                () -> new NoSuchElementException("Coach with id " + id + " does not exist ")
         );
     }
 
     // GET CLIENTS FOR COACH
     @GetMapping("/getclients/{coachId}")
-    public Iterable<ClientFlx> getClients(@PathVariable long coachId){
-        LOGGER.info("coach/getclients/"+coachId + " ☺");
+    public Iterable<ClientFlx> getClients(@PathVariable long coachId) {
+        LOGGER.info("coach/getclients/" + coachId + " ☺");
 
-        CoachFlx coachFlx = coachFlxRepository.findById(coachId).orElseThrow(()->
-                new NoSuchElementException("Coach with id "+ coachId+ " does not exist " ));
+        CoachFlx coachFlx = coachFlxRepository.findById(coachId).orElseThrow(() ->
+                new NoSuchElementException("Coach with id " + coachId + " does not exist "));
 
        /* Iterable<ClientCoachMembershipFlx> memberships = membershipFlxRepository.findByCoachFlx(coachFlx);
 
         return memberships;*/
 
         Iterable<ClientFlx> clients = membershipFlxRepository.findClientFlxByStatusAndCoachIdParams(coachId);
-//        Iterable<ClientFlx> clients = membershipFlxRepository.findClientFlxByStatusAndCoachIdParams("Active",coachId);
+        //        Iterable<ClientFlx> clients = membershipFlxRepository.findClientFlxByStatusAndCoachIdParams("Active",coachId);
         return clients;
 
     }
@@ -60,28 +59,27 @@ public class CoachFlxController {
     //    GET ALL
     @GetMapping("/getall")
     @PreAuthorize("hasRole('COACH')")
-    public Iterable<CoachFlx> getAllCoaches(){
+    public Iterable<CoachFlx> getAllCoaches() {
         LOGGER.info("coach/getall ☺");
 
-        return  coachFlxRepository.findAll();
+        return coachFlxRepository.findAll();
 
 
     }
 
 
-
     // ADD NEW
     @PostMapping("/new")
-    public  CoachFlx addNewCoach(@RequestBody CoachFlx coachFlx){
+    public CoachFlx addNewCoach(@RequestBody CoachFlx coachFlx) {
         LOGGER.info("coach/new/{id}" + " ☺");
         return coachFlxRepository.save(coachFlx);
     }
 
     // DELETE ONE
     @DeleteMapping("/delete/{id}")
-    public void deleteCoach(@PathVariable long id){
-        LOGGER.info("client/delete/"+id + " ☺");
-        CoachFlx foundCoach=verifyCoach(id);
+    public void deleteCoach(@PathVariable long id) {
+        LOGGER.info("client/delete/" + id + " ☺");
+        CoachFlx foundCoach = verifyCoach(id);
         coachFlxRepository.delete(foundCoach);
     }
 

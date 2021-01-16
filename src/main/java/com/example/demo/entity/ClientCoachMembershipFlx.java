@@ -25,7 +25,7 @@ public class ClientCoachMembershipFlx {
     LocalDateTime registeredAt;
     int membershipDurationDays;
 
-    public ClientCoachMembershipFlx(){
+    public ClientCoachMembershipFlx() {
     }
 
     public ClientCoachMembershipFlx(ClientFlx clientFlx, CoachFlx coachFlx, LocalDateTime registeredAt, int membershipDurationDays) {

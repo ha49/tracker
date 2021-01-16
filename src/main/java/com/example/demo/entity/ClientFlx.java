@@ -9,7 +9,7 @@ import java.util.Set;
 
 
 @Entity
-@Table (name = "ClientFlx")
+@Table(name = "ClientFlx")
 public class ClientFlx {
 
     @Id
@@ -31,8 +31,8 @@ public class ClientFlx {
     @Column(name = "height")
     private int height;
 
-//    @Column(name = "email")
-//    private String email;
+    //    @Column(name = "email")
+    //    private String email;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -50,7 +50,7 @@ public class ClientFlx {
     private String lifeStyle;
     @Column(name = "status")
     private String status;
-//    private LifeStyle lifeStyle;
+    //    private LifeStyle lifeStyle;
 
     //@OneToMany(mappedBy = "client_flx")
     @OneToMany()
@@ -87,10 +87,10 @@ public class ClientFlx {
         this.gender = gender;
         this.lifeStyle = lifeStyle;
         this.status = status;
-        this.userFlx=userFlx;
+        this.userFlx = userFlx;
     }
 
-    public ClientFlx(){
+    public ClientFlx() {
 
     }
 

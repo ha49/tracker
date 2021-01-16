@@ -14,9 +14,6 @@ import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
-
-
-
 @Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfiguration
@@ -31,14 +28,14 @@ public class ApplicationSecurityConfiguration
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userFlxDetailsService);
         provider.setPasswordEncoder(new BCryptPasswordEncoder());
-         provider.setAuthoritiesMapper(authoritiesMapper());
+        provider.setAuthoritiesMapper(authoritiesMapper());
         return provider;
 
     }
 
     @Bean
-    public GrantedAuthoritiesMapper authoritiesMapper(){
-        SimpleAuthorityMapper authorityMapper=new SimpleAuthorityMapper();
+    public GrantedAuthoritiesMapper authoritiesMapper() {
+        SimpleAuthorityMapper authorityMapper = new SimpleAuthorityMapper();
         authorityMapper.setConvertToLowerCase(true);
         authorityMapper.setDefaultAuthority("USER");
         return authorityMapper;
@@ -55,7 +52,7 @@ public class ApplicationSecurityConfiguration
                 .csrf().disable()
                 .authorizeRequests()
 
-//                .antMatchers("/admin").hasRole("ADMIN")
+                //                .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/coach/**").hasRole("coach")
                 .antMatchers("/client/**").hasRole("client")
                 .antMatchers("/clientpage").hasRole("client")
@@ -63,7 +60,7 @@ public class ApplicationSecurityConfiguration
                 .antMatchers("/member/new").hasRole("client")
                 .antMatchers("/member/**").hasRole("coach")
 
-                .antMatchers("/","static/css", "static/js").permitAll()
+                .antMatchers("/", "static/css", "static/js").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -77,13 +74,12 @@ public class ApplicationSecurityConfiguration
     }
 
 
-
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        List<UserDetails> users =new ArrayList<>();
-//        users.add(User.withDefaultPasswordEncoder().username("john").password("me").roles("USER", "ADMIN").build());
-//        users.add(User.withDefaultPasswordEncoder().username("mike").password("you").roles("USER").build());
-//        return  new InMemoryUserDetailsManager(users);
-//    }
+    //    @Bean
+    //    @Override
+    //    public UserDetailsService userDetailsService() {
+    //        List<UserDetails> users =new ArrayList<>();
+    //        users.add(User.withDefaultPasswordEncoder().username("john").password("me").roles("USER", "ADMIN").build());
+    //        users.add(User.withDefaultPasswordEncoder().username("mike").password("you").roles("USER").build());
+    //        return  new InMemoryUserDetailsManager(users);
+    //    }
 }

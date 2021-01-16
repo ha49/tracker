@@ -43,6 +43,7 @@ public class UserFlxController {
         //           logger.error("Vi loggar på ERROR-nivå");
         return userFlxService.createCoach(coachFlx);
     }
+
     @PostMapping("/createClient")
     //    @PreAuthorize("hasRole('ADMIN')")
     public UserFlx createClient(@RequestBody ClientFlx clientFlx) {
@@ -67,9 +68,8 @@ public class UserFlxController {
     }
 
 
-
     @GetMapping("/findall")
-//    @PreAuthorize("hasRole('ADMIN')")
+    //    @PreAuthorize("hasRole('ADMIN')")
     public Iterable<UserFlx> findAllUsers() {
         return userFlxService.findAllUsers();
     }

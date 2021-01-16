@@ -15,10 +15,11 @@ public class UserFlx {
     private String username;
     private String password;
     private String email;
+
     public UserFlx() {
     }
 
-    public UserFlx(@NotEmpty String username,  String password, String email) {
+    public UserFlx(@NotEmpty String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;

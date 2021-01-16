@@ -6,5 +6,4 @@ public interface UserFlxRepository extends CrudRepository<UserFlx, Long> {
     UserFlx findByUsername(String username);
 
 
-
 }

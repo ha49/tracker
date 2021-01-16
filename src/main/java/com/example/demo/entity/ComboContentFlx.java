@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class ComboContentFlx {
     @Id
-    @Column( name = "id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "name")

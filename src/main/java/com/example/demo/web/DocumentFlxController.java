@@ -27,33 +27,31 @@ public class DocumentFlxController {
     }
 
 
-
-
     //    GET ONE
 
     @GetMapping("/get/{id}")
-    public DocumentFlx getDocument(@PathVariable long id){
-        LOGGER.info("document/get/"+id + " ☺");
+    public DocumentFlx getDocument(@PathVariable long id) {
+        LOGGER.info("document/get/" + id + " ☺");
 
         return documentFlxRepository.findById(id).orElseThrow(
-                ()-> new NoSuchElementException("Client with id "+ id+ " does not exist ")
+                () -> new NoSuchElementException("Client with id " + id + " does not exist ")
         );
     }
 
     //    GET ALL
     @GetMapping("/getall")
-    public Iterable<DocumentFlx> getAllDocuments(){
+    public Iterable<DocumentFlx> getAllDocuments() {
         LOGGER.info("document/getall ☺");
         return documentFlxRepository.findAll();
     }
 
     // GET DOCUMENTS OF A CLIENT
     @GetMapping("/getforclient/{clientId}")
-    public Iterable<DocumentFlx> getAllDocuments4Client(@PathVariable long clientId){
-        LOGGER.info("document/getforcoach/"+clientId + " ☺");
+    public Iterable<DocumentFlx> getAllDocuments4Client(@PathVariable long clientId) {
+        LOGGER.info("document/getforcoach/" + clientId + " ☺");
 
-        ClientFlx clientFlx = clientFlxRepository.findById(clientId).orElseThrow(()->
-                new NoSuchElementException("Client with id "+ clientId+ " does not exist " ));
+        ClientFlx clientFlx = clientFlxRepository.findById(clientId).orElseThrow(() ->
+                new NoSuchElementException("Client with id " + clientId + " does not exist "));
 
         Iterable<DocumentFlx> documents = documentFlxRepository.findByClientFlx(clientFlx);
 
@@ -65,11 +63,11 @@ public class DocumentFlxController {
     // ADD NEW
 
     @PostMapping("/new")
-    public DocumentFlx addNewDocument(@RequestBody DocumentFlx documentFlx){
+    public DocumentFlx addNewDocument(@RequestBody DocumentFlx documentFlx) {
 
 
-        clientFlxRepository.findById(documentFlx.getClientFlx().getId()).orElseThrow(()->
-                new NoSuchElementException( "Client with id "+ documentFlx.getClientFlx().getId()+ " does not exist "  ));
+        clientFlxRepository.findById(documentFlx.getClientFlx().getId()).orElseThrow(() ->
+                new NoSuchElementException("Client with id " + documentFlx.getClientFlx().getId() + " does not exist "));
 
         LOGGER.info("client/new/ ☺");
 
@@ -80,8 +78,8 @@ public class DocumentFlxController {
     // DELETE ONE
     @DeleteMapping("/delete/{id}")
 
-    public void deleteDocument(@PathVariable long id){
-        DocumentFlx foundDocument=verifyDocument(id);
+    public void deleteDocument(@PathVariable long id) {
+        DocumentFlx foundDocument = verifyDocument(id);
         documentFlxRepository.delete(foundDocument);
     }
 

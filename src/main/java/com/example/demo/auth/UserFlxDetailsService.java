@@ -26,11 +26,9 @@ public class UserFlxDetailsService implements UserDetailsService {
         if (userFlx == null) {
             throw new UsernameNotFoundException("Can't find username: " + username);
         }
-        List<AuthGroup> authGroups=this.authGroupRepository.findByUsername(username);
-        return new UserFlxPrincipal(userFlx,authGroups);
+        List<AuthGroup> authGroups = this.authGroupRepository.findByUsername(username);
+        return new UserFlxPrincipal(userFlx, authGroups);
     }
-
-
 
 
 }
