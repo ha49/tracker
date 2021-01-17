@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <title>Admin - Welcome</title>
+</head>
+<body>
+<h1 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h1>
+<p>This is the admin console, restricted to administrators only.</p>
+
+<p>Click <a th:href="@{/newUser}">here</a> to add a coach.</p>
+<p>Click <a th:href="@{/coach/getall}">here</a> to see all coaches.</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>
