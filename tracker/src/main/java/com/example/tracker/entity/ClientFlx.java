@@ -208,13 +208,14 @@ public class ClientFlx {
 
     @Override
     public String toString() {
-        return "ClientFlx{" +
+        return " {" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", email=" + userFlx.getEmail() +
                 ", registrationDate=" + registrationDate +
                 ", gender='" + gender + '\'' +
-                ", email=" + userFlx.getEmail() +
+
                 '}';
     }
 }

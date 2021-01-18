@@ -16,10 +16,11 @@ public class MessagePublisher {
     }
 
 //    @Scheduled(fixedRate = 2000)
-    public  void  sendMessage() {
+    public  void  sendMessage(String message) {
 
         System.out.println("Sending message...");
-        MessageObjectSend messageObjectSend = new MessageObjectSend(UUID.randomUUID(), "New client registered",
+        MessageObjectSend messageObjectSend = new MessageObjectSend(UUID.randomUUID(),
+                "New client registered: "+message,
                 LocalDateTime.now());
         jmsTemplate.convertAndSend(JmsConfiguration.TRACKER_QUEUE, messageObjectSend);
         System.out.println("Message sent!");

@@ -106,7 +106,8 @@ public class UserFlxService {
             clientFlx.setUserFlx(savedUser);
 
             clientFlxRepository.save(clientFlx);
-            messagePublisher.sendMessage();
+            String message= clientFlx.toString();
+            messagePublisher.sendMessage(message);
             return new ResponseEntity<>(savedUser,HttpStatus.OK);
         }
 
