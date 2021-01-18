@@ -205,4 +205,16 @@ public class ClientFlx {
     public void setMemberships(Set<ClientCoachMembershipFlx> memberships) {
         this.memberships = memberships;
     }
+
+    @Override
+    public String toString() {
+        return "ClientFlx{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", gender='" + gender + '\'' +
+                ", email=" + userFlx.getEmail() +
+                '}';
+    }
 }

@@ -4,6 +4,7 @@ package com.example.tracker.auth;
 import com.example.tracker.entity.ClientFlx;
 import com.example.tracker.entity.CoachFlx;
 import com.example.tracker.exceptions.UserNameAlreadyTakenException;
+import com.example.tracker.jms.sender.MessagePublisher;
 import com.example.tracker.repository.ClientFlxRepository;
 import com.example.tracker.repository.CoachFlxRepository;
 import com.example.tracker.repository.UserFlxRepository;
@@ -32,6 +33,9 @@ public class UserFlxService {
 
     @Autowired
     ClientFlxRepository clientFlxRepository;
+
+    @Autowired
+    MessagePublisher messagePublisher;
 
     private UserFlxRepository userFlxRepository;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -102,6 +106,7 @@ public class UserFlxService {
             clientFlx.setUserFlx(savedUser);
 
             clientFlxRepository.save(clientFlx);
+            messagePublisher.sendMessage();
             return new ResponseEntity<>(savedUser,HttpStatus.OK);
         }
 

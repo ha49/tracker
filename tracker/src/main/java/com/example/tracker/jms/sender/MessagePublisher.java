@@ -15,7 +15,7 @@ public class MessagePublisher {
         this.jmsTemplate = jmsTemplate;
     }
 
-    @Scheduled(fixedRate = 2000)
+//    @Scheduled(fixedRate = 2000)
     public  void  sendMessage() {
 
         System.out.println("Sending message...");
