@@ -11,10 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/coach")
+@RolesAllowed({"coach", "ADMIN"})
 public class CoachFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CoachFlxController.class);
 
@@ -58,7 +60,7 @@ public class CoachFlxController {
 
     //    GET ALL
     @GetMapping("/getall")
-    @PreAuthorize("hasAnyRole('COACH', 'coach')")
+//    @PreAuthorize("hasAnyRole('COACH', 'coach')")
     public Iterable<CoachFlx> getAllCoaches() {
         LOGGER.info("coach/getall ☺");
 

@@ -1,4 +1,4 @@
-package com.example.customer.jms;
+package com.example.tracker.jms.sender;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -7,21 +7,21 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Component
-public class Sender {
+public class MessagePublisher {
 
     JmsTemplate jmsTemplate;
 
-    public Sender(JmsTemplate jmsTemplate) {
+    public MessagePublisher(JmsTemplate jmsTemplate) {
         this.jmsTemplate = jmsTemplate;
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 2000)
     public  void  sendMessage() {
 
         System.out.println("Sending message...");
-        MessageObject messageObject = new MessageObject(UUID.randomUUID(), "New client registered",
+        MessageObjectSend messageObjectSend = new MessageObjectSend(UUID.randomUUID(), "New client registered",
                 LocalDateTime.now());
-        jmsTemplate.convertAndSend(JmsConfig.JU19_QUEUE, messageObject);
+        jmsTemplate.convertAndSend(JmsConfiguration.TRACKER_QUEUE, messageObjectSend);
         System.out.println("Message sent!");
 
     }

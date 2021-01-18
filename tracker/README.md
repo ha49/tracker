@@ -49,6 +49,30 @@ Output:
 
 ]
 ````
+# GET COACHES with invalid credentials for coach (username: coach1 , password: 1234)
+
+__Get All Coaches URL: http://localhost:8080/coach/getall__
+__Get All Coaches URL: http://thx.herokuapp.com/coach/getall__
+
+Output:
+````
+Invalid username and password.
+
+````
+# GET COACHES with valid credentials for client (username: client1 , password: 12345)
+The user who has valid credentials to login the application both is not allowed to access a certain page will receive response below
+__Get All Coaches URL: http://localhost:8080/coach/getall__
+__Get All Coaches URL: http://thx.herokuapp.com/coach/getall__
+
+Output:
+````
+You are not authorized to access this page
+Forbidden
+Status code: 403
+Back to home page
+
+````
+
 
 __GetOne URL: http://localhost:8080/studeman/api/v1/student/1__
 

@@ -3,10 +3,16 @@ package com.example.tracker.auth;
 
 import com.example.tracker.entity.ClientFlx;
 import com.example.tracker.entity.CoachFlx;
+import com.example.tracker.exceptions.UserNameAlreadyTakenException;
 import com.example.tracker.repository.ClientFlxRepository;
 import com.example.tracker.repository.CoachFlxRepository;
 import com.example.tracker.repository.UserFlxRepository;
+import com.example.tracker.web.CoachFlxController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +22,7 @@ import java.util.Optional;
 
 @Service
 public class UserFlxService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserFlxService.class);
 
     @Autowired
     AuthGroupRepository authGroupRepository;
@@ -63,36 +70,63 @@ public class UserFlxService {
     }
 
     public UserFlx createCoach(CoachFlx coachFlx) {
+        String username=coachFlx.getUserFlx().getUsername();
+        if (userFlxRepository.findByUsername(coachFlx.getUserFlx().getUsername()) != null) {
+            throw new UserNameAlreadyTakenException("username "+ username+" is already taken!");
 
-        UserFlx newUser = coachFlx.getUserFlx();
-        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-        UserFlx savedUser = userFlxRepository.save(newUser);
-        authGroupRepository.save(new AuthGroup(newUser.getUsername(), "COACH"));
+        } else {
+            UserFlx newUser = coachFlx.getUserFlx();
+            newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+            UserFlx savedUser = userFlxRepository.save(newUser);
+            authGroupRepository.save(new AuthGroup(newUser.getUsername(), "COACH"));
 
-        coachFlx.setUserFlx(savedUser);
+            coachFlx.setUserFlx(savedUser);
 
-        coachFlxRepository.save(coachFlx);
-        return savedUser;
+            coachFlxRepository.save(coachFlx);
+            return savedUser;
+        }
     }
 
 
-    public UserFlx createClient(ClientFlx clientFlx) {
+    public ResponseEntity<UserFlx> createClient(ClientFlx clientFlx)  {
+        String username=clientFlx.getUserFlx().getUsername();
+        if (userFlxRepository.findByUsername(username) !=null){
+            throw new UserNameAlreadyTakenException("username "+ username+" is already taken!");
 
-        UserFlx newUser = clientFlx.getUserFlx();
-        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-        UserFlx savedUser = userFlxRepository.save(newUser);
-        authGroupRepository.save(new AuthGroup(newUser.getUsername(), "CLIENT"));
+        } else{
+            UserFlx newUser = clientFlx.getUserFlx();
+            newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+            UserFlx savedUser = userFlxRepository.save(newUser);
+            authGroupRepository.save(new AuthGroup(newUser.getUsername(), "CLIENT"));
 
-        clientFlx.setUserFlx(savedUser);
+            clientFlx.setUserFlx(savedUser);
 
-        clientFlxRepository.save(clientFlx);
-        return savedUser;
+            clientFlxRepository.save(clientFlx);
+            return new ResponseEntity<>(savedUser,HttpStatus.OK);
+        }
+
     }
 
 
     public void deleteUser(Long id) {
         Optional<UserFlx> foundUser = userFlxRepository.findById(id);
         userFlxRepository.deleteById(foundUser.get().getId());
+    }
+    //This method is problematic
+    public void deleteClientFlx(String username) {
+        UserFlx searchedUser = userFlxRepository.findByUsername(username);
+
+        LOGGER.info("deleteClientFlx called." );
+        LOGGER.info("searchedUser: "+ searchedUser );
+
+//        userFlxRepository.deleteById(searchedUser.getId());
+        clientFlxRepository.deleteById(searchedUser.getId());
+    }
+
+    public void deleteClientFlx(Long id) {
+        Optional<ClientFlx> foundClient = clientFlxRepository.findById(id);
+        clientFlxRepository.deleteById(id);
+
     }
 
     public Optional<UserFlx> findUserById(Long id) {
@@ -113,5 +147,6 @@ public class UserFlxService {
         String authenticatedUsername = authentication.getName();
         return getUserByUsername(authenticatedUsername);
     }
+
 
 }

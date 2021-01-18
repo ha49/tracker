@@ -1,4 +1,4 @@
-package com.example.customer.jms;
+package com.example.tracker.jms.sender;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Configuration
-public class JmsConfig {
+public class JmsConfiguration {
 
-    public static final String JU19_QUEUE = "ju19-queue";
+    public static final String TRACKER_QUEUE = "tracker-queue";
 
 
 

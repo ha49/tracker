@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,6 +17,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true,
+        jsr250Enabled = true,prePostEnabled = true
+)
 public class ApplicationSecurityConfiguration
         extends WebSecurityConfigurerAdapter {
 
@@ -75,13 +79,14 @@ public class ApplicationSecurityConfiguration
 
                       .csrf().disable()
                 .authorizeRequests()
-
+//
                 .antMatchers( "/home", "/application", "/user/createUser", "/user/createCoach", "user/createAdmin").permitAll()
                 .antMatchers("/admin").permitAll()
-                .antMatchers("/client/getall","/clientpage" ).hasRole("client")
-                .antMatchers("/coach/getall", "/coachpage").hasRole("coach")
-                .antMatchers("/adminpage").hasRole("admin")
-
+//                .antMatchers("/client/getall","/clientpage" ).hasRole("client")
+//                .antMatchers("/coach/getall", "/coachpage").hasRole("coach")
+//                .antMatchers("/adminpage").hasRole("admin")
+                .antMatchers("/client/**","/clientpage" ).hasAnyRole("client", "coach")
+                .antMatchers( "/coachpage").hasRole("coach")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
