@@ -1,4 +1,4 @@
-package com.example.customer.jms;
+package com.example.tracker.jms.sender;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class MessageObject implements Serializable {
+public class MessageObjectSend implements Serializable {
 
     private UUID id;
     private String message;
@@ -14,13 +14,13 @@ public class MessageObject implements Serializable {
     private LocalDateTime localDateTime;
 
 
-    public MessageObject(UUID id, String message, LocalDateTime localDateTime) {
+    public MessageObjectSend(UUID id, String message, LocalDateTime localDateTime) {
         this.id = id;
         this.message = message;
         this.localDateTime = localDateTime;
     }
 
-    public MessageObject() {
+    public MessageObjectSend() {
     }
 
     public UUID getId() {
