@@ -1,19 +1,16 @@
 package com.example.tracker.repository;
 
 
-import com.example.tracker.auth.UserFlx;
 import com.example.tracker.entity.ClientFlx;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Repository
 public interface ClientFlxRepository extends CrudRepository<ClientFlx, Long> {
     ClientFlx findByLastName(String lastName);
 
     ClientFlx getClientFlxById(Long id);
-  Iterable <ClientFlx>getClientFlxByUserFlx(UserFlx userFlx);
+//  Iterable <ClientFlx>getClientFlxByUserFlx(UserFlx userFlx);
 
 //    @Override
 //    Optional<ClientFlx> findById(Long aLong);

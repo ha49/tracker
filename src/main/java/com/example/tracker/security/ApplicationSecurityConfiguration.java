@@ -77,10 +77,11 @@ public class ApplicationSecurityConfiguration
                 .permitAll();*/
 
 
-                      .csrf().disable()
+                .csrf().disable()
                 .authorizeRequests()
-//
-                .antMatchers( "/home", "/application", "/user/createUser", "/user/createCoach", "user/createAdmin").permitAll()
+                //
+                .antMatchers("/home", "/application", "/user/createUser", "/user/createCoach", "user/createAdmin",
+                        "/client/delete/**").permitAll()
                 .antMatchers("/admin").permitAll()
 //                .antMatchers("/client/getall","/clientpage" ).hasRole("client")
 //                .antMatchers("/coach/getall", "/coachpage").hasRole("coach")

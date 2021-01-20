@@ -1,7 +1,6 @@
 package com.example.tracker.web;
 
 import com.example.tracker.entity.ClientFlx;
-import com.example.tracker.entity.DocumentFlx;
 import com.example.tracker.repository.ClientFlxRepository;
 import com.example.tracker.repository.CoachFlxRepository;
 import com.example.tracker.repository.DocumentFlxRepository;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/client")
 public class ClientFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientFlxController.class);
     private ClientFlxRepository clientFlxRepository;
@@ -55,8 +54,9 @@ public class ClientFlxController {
         return clientFlxRepository.findAll();
     }
 
+/*
 
-    // ADD NEW
+    // ADD NEW CLIENT MOVED TO USER CONTROLLER
     @PostMapping("/new")
     public ClientFlx addNewClient(@RequestBody ClientFlx clientFlx) {
 
@@ -67,9 +67,10 @@ public class ClientFlxController {
         return clientFlxRepository.save(clientFlx);
 
     }
+*/
 
 
-    // DELETE ONE
+    // DELETE CLIENT BY ID
     @DeleteMapping("/delete/{id}")
     //    @PreAuthorize("hasRole('client')")
 

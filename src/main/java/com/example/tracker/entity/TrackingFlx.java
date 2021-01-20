@@ -10,13 +10,6 @@ public class TrackingFlx {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    /*@ManyToOne
-    @JoinColumn
-    private ClientFlx clientFlx;
-    @ManyToOne
-    @JoinColumn
-    private CoachFlx coachFlx;*/
-
     @ManyToOne
     @JoinColumn
     private ClientCoachMembershipFlx clientCoachMembershipFlx;
