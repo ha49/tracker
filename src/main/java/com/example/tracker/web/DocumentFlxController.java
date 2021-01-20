@@ -69,7 +69,7 @@ public class DocumentFlxController {
         clientFlxRepository.findById(documentFlx.getClientFlx().getId()).orElseThrow(() ->
                 new NoSuchElementException("Client with id " + documentFlx.getClientFlx().getId() + " does not exist "));
 
-        LOGGER.info("client/new/ ☺");
+        LOGGER.info("document/new/ ☺");
 
         return documentFlxRepository.save(documentFlx);
     }

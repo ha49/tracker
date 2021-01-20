@@ -11,7 +11,7 @@ public class DocumentFlx {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clientId")
     private ClientFlx clientFlx;
 
