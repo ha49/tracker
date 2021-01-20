@@ -8,7 +8,6 @@ import com.example.tracker.jms.sender.MessagePublisher;
 import com.example.tracker.repository.ClientFlxRepository;
 import com.example.tracker.repository.CoachFlxRepository;
 import com.example.tracker.repository.UserFlxRepository;
-import com.example.tracker.web.CoachFlxController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,7 +106,10 @@ public class UserFlxService {
 
             clientFlxRepository.save(clientFlx);
             String message= clientFlx.toString();
+
+
             messagePublisher.sendMessage(message);
+
             return new ResponseEntity<>(savedUser,HttpStatus.OK);
         }
 
@@ -129,8 +131,10 @@ public class UserFlxService {
         clientFlxRepository.deleteById(searchedUser.getId());
     }
 
+
     public void deleteClientFlx(Long id) {
         Optional<ClientFlx> foundClient = clientFlxRepository.findById(id);
+        UserFlx founduser = foundClient.get().getUserFlx();
         clientFlxRepository.deleteById(id);
 
     }

@@ -56,7 +56,7 @@ public class ClientFlx {
     @OneToMany()
     Set<ClientCoachMembershipFlx> memberships;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "clientFlx")
     Set<DocumentFlx> documents;
 
     /*@OneToMany(mappedBy = "Client", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
@@ -204,6 +204,14 @@ public class ClientFlx {
 
     public void setMemberships(Set<ClientCoachMembershipFlx> memberships) {
         this.memberships = memberships;
+    }
+
+    public Set<DocumentFlx> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<DocumentFlx> documents) {
+        this.documents = documents;
     }
 
     @Override

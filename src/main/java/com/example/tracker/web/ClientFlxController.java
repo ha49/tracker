@@ -1,10 +1,10 @@
 package com.example.tracker.web;
 
-import com.example.tracker.auth.AuthGroup;
-import com.example.tracker.auth.UserFlxPrincipal;
 import com.example.tracker.entity.ClientFlx;
+import com.example.tracker.entity.DocumentFlx;
 import com.example.tracker.repository.ClientFlxRepository;
 import com.example.tracker.repository.CoachFlxRepository;
+import com.example.tracker.repository.DocumentFlxRepository;
 import com.example.tracker.repository.UserFlxRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,23 +15,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/client")
+@RequestMapping("/clients")
 public class ClientFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientFlxController.class);
     private ClientFlxRepository clientFlxRepository;
     private CoachFlxRepository coachFlxRepository;
     private UserFlxRepository userFlxRepository;
-
-    private UserFlxPrincipal userFlxPrincipal;
+    private DocumentFlxRepository documentFlxRepository;
 
     public ClientFlxController(ClientFlxRepository clientFlxRepository,
                                CoachFlxRepository coachFlxRepository,
-                               UserFlxRepository userFlxRepository
+                               UserFlxRepository userFlxRepository,
+                               DocumentFlxRepository documentFlxRepository
     ) {
         this.clientFlxRepository = clientFlxRepository;
         this.coachFlxRepository = coachFlxRepository;
-        this.userFlxRepository=userFlxRepository;
-
+        this.userFlxRepository = userFlxRepository;
+        this.documentFlxRepository = documentFlxRepository;
     }
 
     //    GET ONE
@@ -47,7 +47,6 @@ public class ClientFlxController {
     }
 
 
-
     //    GET ALL
     @GetMapping("/getall")
     @PreAuthorize("hasRole('coach')")
@@ -55,7 +54,6 @@ public class ClientFlxController {
         LOGGER.info("client/getall ☺");
         return clientFlxRepository.findAll();
     }
-
 
 
     // ADD NEW
@@ -73,13 +71,23 @@ public class ClientFlxController {
 
     // DELETE ONE
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasRole('client')")
+    //    @PreAuthorize("hasRole('client')")
 
     public void deleteClient(@PathVariable long id) {
-        LOGGER.info("coach/delete/" + id + " ☺");
+        LOGGER.info("clients/delete/" + id + " ☺");
 
         ClientFlx foundClient = verifyClient(id);
-        clientFlxRepository.delete(foundClient);
+        System.out.println("fount client id " + foundClient.getId());
+
+        for (DocumentFlx document : foundClient.getDocuments()
+        ) {
+            System.out.println("document id: " + document.getId());
+            documentFlxRepository.delete(document);
+        }
+
+        clientFlxRepository.deleteById(id);
+        //        userFlxRepository.delete(foundClient.getUserFlx());
+        System.out.println(clientFlxRepository.getClientFlxById(foundClient.getId()));
     }
 
 
