@@ -1,7 +1,7 @@
 package com.example.tracker.entity;
 
 import com.example.tracker.auth.UserFlx;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

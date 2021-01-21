@@ -8,15 +8,13 @@ import com.example.tracker.repository.CoachFlxRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/coach")
-@RolesAllowed({"coach", "ADMIN"})
+//@RolesAllowed({"coach", "ADMIN"})
 public class CoachFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CoachFlxController.class);
 
@@ -80,7 +78,7 @@ public class CoachFlxController {
     // DELETE ONE
     @DeleteMapping("/delete/{id}")
     public void deleteCoach(@PathVariable long id) {
-        LOGGER.info("client/delete/" + id + " ☺");
+        LOGGER.info("coach/delete/" + id + " ☺");
         CoachFlx foundCoach = verifyCoach(id);
         coachFlxRepository.delete(foundCoach);
     }

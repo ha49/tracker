@@ -81,6 +81,7 @@ public class ApplicationSecurityConfiguration
                 .authorizeRequests()
                 //
                 .antMatchers("/home", "/application", "/user/createUser", "/user/createCoach", "user/createAdmin",
+                        "/link/**", "/member/**",
                         "/client/delete/**").permitAll()
                 .antMatchers("/admin").permitAll()
 //                .antMatchers("/client/getall","/clientpage" ).hasRole("client")
@@ -88,6 +89,7 @@ public class ApplicationSecurityConfiguration
 //                .antMatchers("/adminpage").hasRole("admin")
                 .antMatchers("/client/**","/clientpage" ).hasAnyRole("client", "coach")
                 .antMatchers( "/coachpage").hasRole("coach")
+
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

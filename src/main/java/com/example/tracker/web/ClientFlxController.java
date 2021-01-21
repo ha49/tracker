@@ -55,17 +55,14 @@ public class ClientFlxController {
     }
 
 /*
-
     // ADD NEW CLIENT MOVED TO USER CONTROLLER
     @PostMapping("/new")
     public ClientFlx addNewClient(@RequestBody ClientFlx clientFlx) {
-
         //        CoachFlx coachFlx = coachFlxRepository.findById(clientFlx.getCoachFlx().getId()).orElseThrow(()->
-        //                new RuntimeException("Coach does not exist: " + clientFlx.getCoachFlx().getId()));
+        //        new RuntimeException("Coach does not exist: " + clientFlx.getCoachFlx().getId()));
 
         LOGGER.info("client/new/ ☺");
         return clientFlxRepository.save(clientFlx);
-
     }
 */
 

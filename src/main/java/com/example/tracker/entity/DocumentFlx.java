@@ -1,7 +1,5 @@
 package com.example.tracker.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 
 @Entity

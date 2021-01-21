@@ -14,6 +14,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/link")
+
 public class LinkFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkFlxController.class);
     private LinkFlxRepository linkFlxRepository;
