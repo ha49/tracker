@@ -75,11 +75,11 @@ public class ClientFlxController {
         ClientFlx foundClient = verifyClient(id);
         System.out.println("fount client id " + foundClient.getId());
 
-        for (DocumentFlx document : foundClient.getDocuments()
-        ) {
-            System.out.println("document id: " + document.getId());
-            documentFlxRepository.delete(document);
-        }
+        //        for (DocumentFlx document : foundClient.getDocuments()
+        //        ) {
+        //            System.out.println("document id: " + document.getId());
+        //            documentFlxRepository.delete(document);
+        //        }
 
         clientFlxRepository.deleteById(id);
         //        userFlxRepository.delete(foundClient.getUserFlx());

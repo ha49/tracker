@@ -18,6 +18,7 @@ public class ClientFlx {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+
     @NotEmpty
     @Column(name = "first_name")
     private String firstName;
@@ -53,11 +54,16 @@ public class ClientFlx {
     private String status;
     //    private LifeStyle lifeStyle;
 
-    //@OneToMany(mappedBy = "client_flx")
-    @OneToMany()
+    //@OneToMany(mappedBy = "clientFlx", cascade = CascadeType.ALL)
+    //@JsonBackReference(value = "membership")
+    @JsonIgnore
+    @OneToMany(mappedBy = "clientFlx", orphanRemoval = true)
     Set<ClientCoachMembershipFlx> memberships;
 
-    @OneToMany(mappedBy = "clientFlx")
+    //@OneToMany(mappedBy = "clientFlx", cascade = CascadeType.ALL)
+    //@JsonBackReference(value = "documents")
+    @JsonIgnore
+    @OneToMany(mappedBy = "clientFlx", orphanRemoval = true)
     Set<DocumentFlx> documents;
 
     /*@OneToMany(mappedBy = "Client", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)

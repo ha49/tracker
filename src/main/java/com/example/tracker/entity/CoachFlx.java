@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+//@JsonSerialize
 public class CoachFlx {
     @Id
     @Column(name = "id")
