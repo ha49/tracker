@@ -18,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true,
-        jsr250Enabled = true,prePostEnabled = true
+        jsr250Enabled = true, prePostEnabled = true
 )
 public class ApplicationSecurityConfiguration
         extends WebSecurityConfigurerAdapter {
@@ -53,42 +53,42 @@ public class ApplicationSecurityConfiguration
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-/*                .csrf().disable()
-                .authorizeRequests()
+                /*                .csrf().disable()
+                                .authorizeRequests()
 
-                //                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/coach/**").hasRole("coach")
-                .antMatchers("/client/**").hasRole("client")
-                .antMatchers("/clientpage").hasRole("client")
-                .antMatchers("/coachpage").hasRole("coach")
-                .antMatchers("/member/new").hasRole("client")
-                .antMatchers("/member/**").hasRole("coach")
+                                //                .antMatchers("/admin").hasRole("ADMIN")
+                                .antMatchers("/coach/**").hasRole("coach")
+                                .antMatchers("/client/**").hasRole("client")
+                                .antMatchers("/clientpage").hasRole("client")
+                                .antMatchers("/coachpage").hasRole("coach")
+                                .antMatchers("/member/new").hasRole("client")
+                                .antMatchers("/member/**").hasRole("coach")
 
-                .antMatchers("/", "static/css", "static/js").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .permitAll();*/
+                                .antMatchers("/", "static/css", "static/js").permitAll()
+                                .anyRequest().authenticated()
+                                .and()
+                                .formLogin()
+                                .loginPage("/login")
+                                .permitAll()
+                                .and()
+                                .logout()
+                                .invalidateHttpSession(true)
+                                .clearAuthentication(true)
+                                .permitAll();*/
 
 
                 .csrf().disable()
                 .authorizeRequests()
                 //
-                .antMatchers("/home", "/application", "/user/createUser", "/user/createCoach", "user/createAdmin",
-                        "/link/**", "/member/**",
+                .antMatchers("/home", "/application", "/user/createUser", "/user/createCoach",
+                        "/link/**", "/member/**", "/tracking",
                         "/client/delete/**").permitAll()
                 .antMatchers("/admin").permitAll()
-//                .antMatchers("/client/getall","/clientpage" ).hasRole("client")
-//                .antMatchers("/coach/getall", "/coachpage").hasRole("coach")
-//                .antMatchers("/adminpage").hasRole("admin")
-                .antMatchers("/client/**","/clientpage" ).hasAnyRole("client", "coach")
-                .antMatchers( "/coachpage").hasRole("coach")
+                .antMatchers("/clientpage").hasRole("client")
+
+                .antMatchers("/adminpage").hasRole("admin")
+                .antMatchers("/client/**").hasAnyRole("client", "coach")
+                .antMatchers("/coachpage").hasRole("coach")
 
                 .anyRequest().permitAll()
                 .and()
@@ -100,10 +100,6 @@ public class ApplicationSecurityConfiguration
                 .clearAuthentication(true)
                 .permitAll();
     }
-
-
-
-
 
 
     //    @Bean

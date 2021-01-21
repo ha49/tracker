@@ -10,11 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/coach")
-//@RolesAllowed({"coach", "ADMIN"})
+@RolesAllowed({"coach", "ADMIN"})
 public class CoachFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CoachFlxController.class);
 

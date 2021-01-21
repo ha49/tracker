@@ -34,10 +34,7 @@ public class ClientFlxController {
     }
 
     //    GET ONE
-
     @GetMapping("/get/{id}")
-
-
     public ClientFlx getClient(@PathVariable long id) {
         LOGGER.info("client/get/" + id + " ☺");
         return clientFlxRepository.findById(id).orElseThrow(
