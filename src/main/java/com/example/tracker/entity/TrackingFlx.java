@@ -12,7 +12,8 @@ public class TrackingFlx {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
     @JoinColumn
     private ClientCoachMembershipFlx clientCoachMembershipFlx;
 

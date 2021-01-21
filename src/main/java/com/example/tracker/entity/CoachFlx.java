@@ -24,11 +24,17 @@ public class CoachFlx {
 
 
     //@OneToMany(mappedBy = "coach_flx")
-    @OneToMany()
-    Set<ClientCoachMembershipFlx> memberships;
+    //@OneToMany(mappedBy = "coachFlx", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "coachFlx", orphanRemoval = true)
+    //@JsonBackReference(value = "membership")
+            Set<ClientCoachMembershipFlx> memberships;
 
-    @OneToMany()
-    Set<LinkFlx> links;
+    //@OneToMany(mappedBy = "coachFlx", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "coachFlx", orphanRemoval = true)
+    //@JsonBackReference(value = "links")
+            Set<LinkFlx> links;
 
     @OneToOne
     private UserFlx userFlx;

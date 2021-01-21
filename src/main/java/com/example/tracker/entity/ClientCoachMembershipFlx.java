@@ -11,16 +11,18 @@ public class ClientCoachMembershipFlx {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
+    @ManyToOne//(fetch = FetchType.LAZY)
+    //@JsonManagedReference
     @JoinColumn(name = "client_id")
     ClientFlx clientFlx;
 
-    @ManyToOne
+    @ManyToOne//(fetch = FetchType.LAZY)
+    // @JsonManagedReference
     @JoinColumn(name = "coach_id")
     CoachFlx coachFlx;
-
-    //@OneToMany()
-    //Set<TrackingFlx> clientTrackings;
+    //
+    //    @OneToMany(mappedBy = "clientCoachMembershipFlx", cascade = CascadeType.ALL)
+    //    Set<TrackingFlx> clientTrackings;
 
     LocalDateTime registeredAt;
     int membershipDurationDays;

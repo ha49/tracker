@@ -15,8 +15,11 @@ public class LinkFlx {
     @Column(name = "link")
     private String link;
 
-    //(cascade = CascadeType.PERSIST)
-    @ManyToOne
+
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne//(fetch = FetchType.LAZY)
+    //@JsonManagedReference
+    //@JsonIgnore
     @JoinColumn(name = "coachId", nullable = false)
     private CoachFlx coachFlx;
 

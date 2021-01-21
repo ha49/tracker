@@ -11,7 +11,8 @@ public class DocumentFlx {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne//(fetch = FetchType.LAZY)
+    //@JsonManagedReference
     @JoinColumn(name = "clientId")
     private ClientFlx clientFlx;
 

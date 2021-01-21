@@ -72,7 +72,8 @@ public class ClientFlxController {
     //    @PreAuthorize("hasRole('client')")
 
     public void deleteClient(@PathVariable long id) {
-        LOGGER.info("clients/delete/" + id + " ☺");
+
+        LOGGER.info("client/delete/" + id + " ☺");
 
         ClientFlx foundClient = verifyClient(id);
         System.out.println("fount client id " + foundClient.getId());
