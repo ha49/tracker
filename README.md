@@ -6,6 +6,7 @@ In order to run the program smoothly please run Artemis Server in a Docker Conta
 
 ● Then run TrackerApplication.java under src/main/java/com/example/tracker/web folder.
 
+● Application is  deployed to heroku https://thx.herokuapp.com/ 
 ## SIGN UP
 
 This application allows registration for two roles: CLIENT and COACH. Registration for these roles are open to anybody
@@ -149,7 +150,7 @@ When Client is removed, document and program membership data will also be delete
 
 __Delete Client By Id http://localhost:8080/client/delete/224__
 
-## CLIENT DECIDES TO END HIS/HER SUBSCRIPTION
+## COACH DECIDES TO END HIS/HER SUBSCRIPTION
 
 ### DELETE:
 
