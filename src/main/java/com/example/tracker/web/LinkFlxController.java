@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/link")
+@RequestMapping("api/v1/link")
 
 public class LinkFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkFlxController.class);

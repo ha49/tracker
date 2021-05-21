@@ -14,7 +14,7 @@ import java.sql.Date;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/tracking")
+@RequestMapping("api/v1/tracking")
 public class TrackingFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrackingFlxController.class);
     private TrackingFlxRepository trackingFlxRepository;

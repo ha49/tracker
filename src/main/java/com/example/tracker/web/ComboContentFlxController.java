@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/combocontent")
+@RequestMapping("api/v1/combocontent")
 public class ComboContentFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkFlxController.class);
     private ComboContentFlxRepository comboContentFlxRepository;

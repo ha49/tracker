@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/document")
+@RequestMapping("api/v1/document")
 public class DocumentFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(DocumentFlxController.class);
     private DocumentFlxRepository documentFlxRepository;

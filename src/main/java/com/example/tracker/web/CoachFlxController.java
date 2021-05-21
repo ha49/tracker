@@ -14,7 +14,7 @@ import javax.annotation.security.RolesAllowed;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/coach")
+@RequestMapping("api/v1/coach")
 @RolesAllowed({"coach", "ADMIN"})
 public class CoachFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CoachFlxController.class);
