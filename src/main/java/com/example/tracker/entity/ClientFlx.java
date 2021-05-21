@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -48,8 +49,12 @@ public class ClientFlx {
     @Column(name = "gender")
     private String gender;
 
+    @Column(name = "client_photo_link")
+    private String clientPhotoLink;
+
     @Column(name = "lifestyle")
     private String lifeStyle;
+
     @Column(name = "status")
     private String status;
     //    private LifeStyle lifeStyle;
@@ -80,8 +85,8 @@ public class ClientFlx {
     @OneToOne
     private UserFlx userFlx;
 
-    public ClientFlx(@NotEmpty String firstName, @NotEmpty String lastName, double weight, int height,
-                     String phoneNumber, String diet, Date registrationDate, String gender, String lifeStyle,
+    public ClientFlx(String firstName, String lastName, double weight, int height,
+                     String phoneNumber, String diet, Date registrationDate, String gender, String clientPhotoLink, String lifeStyle,
                      String status, UserFlx userFlx) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -92,6 +97,7 @@ public class ClientFlx {
         this.diet = diet;
         this.registrationDate = registrationDate;
         this.gender = gender;
+        this.clientPhotoLink = clientPhotoLink;
         this.lifeStyle = lifeStyle;
         this.status = status;
         this.userFlx = userFlx;
@@ -115,6 +121,14 @@ public class ClientFlx {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getClientPhotoLink() {
+        return clientPhotoLink;
+    }
+
+    public void setClientPhotoLink(String clientPhotoLink) {
+        this.clientPhotoLink = clientPhotoLink;
     }
 
     public String getFirstName() {
@@ -232,5 +246,18 @@ public class ClientFlx {
                 ", gender='" + gender + '\'' +
 
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ClientFlx)) return false;
+        ClientFlx clientFlx = (ClientFlx) o;
+        return id == clientFlx.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
