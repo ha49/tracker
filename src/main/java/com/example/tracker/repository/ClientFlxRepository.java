@@ -12,7 +12,7 @@ public interface ClientFlxRepository extends CrudRepository<ClientFlx, Long> {
 
     ClientFlx getClientFlxById(Long id);
 
-    void uploadClientPhoto(long id, MultipartFile file);
+//    void uploadClientPhoto(long id, MultipartFile file);
 
 //  Iterable <ClientFlx>getClientFlxByUserFlx(UserFlx userFlx);
 

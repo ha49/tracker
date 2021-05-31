@@ -1,18 +1,24 @@
 package com.example.tracker.security;
 
+import com.example.tracker.auth.UserFlx;
 import com.example.tracker.auth.UserFlxDetailsService;
+import com.example.tracker.security.jwt.config.JwtAuthenticationEntryPoint;
+import com.example.tracker.security.jwt.config.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -20,12 +26,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true,
         jsr250Enabled = true, prePostEnabled = true
 )
-public class ApplicationSecurityConfiguration
-        extends WebSecurityConfigurerAdapter {
+public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
     private UserFlxDetailsService userFlxDetailsService;
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private JwtRequestFilter jwtRequestFilter;
+
+    public ApplicationSecurityConfiguration(UserFlxDetailsService userFlxDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+                                            JwtRequestFilter jwtRequestFilter) {
+        this.userFlxDetailsService = userFlxDetailsService;
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -36,6 +56,7 @@ public class ApplicationSecurityConfiguration
         return provider;
 
     }
+
 
     @Bean
     public GrantedAuthoritiesMapper authoritiesMapper() {
@@ -82,7 +103,7 @@ public class ApplicationSecurityConfiguration
                 //
                 .antMatchers("/home", "/application", "/user/createUser", "/user/createCoach",
                         "/link/**", "/member/**", "/tracking",
-                        "/client/delete/**").permitAll()
+                        "/client/delete/**", "/authenticate").permitAll()
                 .antMatchers("/admin").permitAll()
                 .antMatchers("/clientpage").hasRole("client")
 
@@ -92,13 +113,20 @@ public class ApplicationSecurityConfiguration
 
                 .anyRequest().permitAll()
                 .and()
-                .formLogin()
-                .loginPage("/login").permitAll()
+//                .formLogin()
+//                .loginPage("/login").permitAll()
+//                .and()
+//                .logout()
+//                .invalidateHttpSession(true)
+//                .clearAuthentication(true)
+//                .permitAll();
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .permitAll();
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
 

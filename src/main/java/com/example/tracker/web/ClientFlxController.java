@@ -95,15 +95,15 @@ public class ClientFlxController {
                 new NoSuchElementException("Client with id " + id + " does not exist "));
     }
 
-    @PostMapping(
-            path ="/{id}/image/upload",
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public void uploadClientPhoto(@PathVariable long id,
-                                  @RequestParam("file") MultipartFile file){
-        clientFlxRepository.uploadClientPhoto(id, file);
-    }
+//    @PostMapping(
+//            path ="/{id}/image/upload",
+//            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+//            produces = MediaType.APPLICATION_JSON_VALUE
+//    )
+//    public void uploadClientPhoto(@PathVariable long id,
+//                                  @RequestParam("file") MultipartFile file){
+//        clientFlxRepository.uploadClientPhoto(id, file);
+//    }
 
     // NO SUCH ELEMENT EXCEPTION
     @ResponseStatus(HttpStatus.NOT_FOUND)
