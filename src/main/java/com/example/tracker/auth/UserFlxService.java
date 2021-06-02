@@ -74,7 +74,7 @@ public class UserFlxService {
 
     public UserFlx createCoach(CoachFlx coachFlx) {
         String username=coachFlx.getUserFlx().getUsername();
-        if (userFlxRepository.findByUsername(coachFlx.getUserFlx().getUsername()) != null) {
+        if (userFlxRepository.findByUsername(username) != null) {
             throw new UserNameAlreadyTakenException("username "+ username+" is already taken!");
 
         } else {
@@ -153,11 +153,26 @@ public class UserFlxService {
     }
 
 
-    public UserFlx getAuthenticatedUser() {
+//    public UserFlx getAuthenticatedUser() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String authenticatedUsername = authentication.getName();
+//        return getUserByUsername(authenticatedUsername);
+//    }
+
+    public ClientFlx getClientFlxByUserFlx(String username) {
+        return clientFlxRepository.getClientFlxByUserFlx_Username(username);
+
+
+
+    }
+
+
+    public ClientFlx getAuthenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String authenticatedUsername = authentication.getName();
-        return getUserByUsername(authenticatedUsername);
+        return getClientFlxByUserFlx(authenticatedUsername);
     }
+
 
 
 }
