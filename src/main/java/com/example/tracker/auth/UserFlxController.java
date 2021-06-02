@@ -98,7 +98,7 @@ public class UserFlxController {
 //    }
 
     @GetMapping("/getauthenticateduser")
-    public UserFlx getAuthenticatedUser() {
+    public ClientFlx getAuthenticatedUser() {
         return userFlxService.getAuthenticatedUser();
     }
 }
