@@ -8,15 +8,14 @@ import com.example.tracker.repository.UserFlxRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("api/v1/client")
+@CrossOrigin("http://localhost:8083")
 public class ClientFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientFlxController.class);
     private ClientFlxRepository clientFlxRepository;
