@@ -112,14 +112,17 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .authorizeRequests()
                 //
                 .antMatchers("/home", "/application", "/user/createUser", "/user/createCoach",
-                        "/link/**", "/member/**", "/tracking",
+                        "/link/**", "/member/**", "/tracking","/api/v1/coach/getall",
                         "/client/delete/**", "/authenticate").permitAll()
                 .antMatchers("/admin").permitAll()
-                .antMatchers("/clientpage").hasRole("client")
+                .antMatchers("/clientpage")
+                .hasAnyRole("client", "coach")
+//                .hasRole("client")
 
                 .antMatchers("/adminpage").hasRole("admin")
                 .antMatchers("/client/**").hasAnyRole("client", "coach")
-                .antMatchers("/coachpage").hasRole("coach")
+                .antMatchers("/coachpage")
+                .hasRole("coach")
 
                 .anyRequest().permitAll()
                 .and()
