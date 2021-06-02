@@ -8,13 +8,14 @@ import com.example.tracker.repository.CoachFlxRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("api/v1/coach")
+@RequestMapping("/api/v1/coach")
 @RolesAllowed({"coach", "ADMIN"})
 public class CoachFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CoachFlxController.class);
@@ -59,7 +60,7 @@ public class CoachFlxController {
 
     //    GET ALL
     @GetMapping("/getall")
-//    @PreAuthorize("hasAnyRole('COACH', 'coach')")
+    @PreAuthorize("hasAnyRole('COACH', 'coach')")
     public Iterable<CoachFlx> getAllCoaches() {
         LOGGER.info("coach/getall ☺");
 

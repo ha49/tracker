@@ -47,7 +47,7 @@ public class ClientFlxController {
 
     //    GET ALL
     @GetMapping("/getall")
-    @PreAuthorize("hasRole('coach')")
+//    @PreAuthorize("hasRole('client')")
     public Iterable<ClientFlx> getAllClients() {
         LOGGER.info("client/getall ☺");
         return clientFlxRepository.findAll();
