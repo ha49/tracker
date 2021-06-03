@@ -97,8 +97,13 @@ public class UserFlxController {
 //        userFlxService.deleteClientFlx(username);
 //    }
 
-    @GetMapping("/getauthenticateduser")
-    public ClientFlx getAuthenticatedUser() {
-        return userFlxService.getAuthenticatedUser();
+    @GetMapping("/getauthenticatedclient")
+    public ClientFlx getAuthenticatedClient() {
+        return userFlxService.getAuthenticatedClient();
+    }
+
+    @GetMapping("/getauthenticatedcoach")
+    public CoachFlx  getAuthenticatedCoach() {
+        return userFlxService.getAuthenticatedCoach();
     }
 }

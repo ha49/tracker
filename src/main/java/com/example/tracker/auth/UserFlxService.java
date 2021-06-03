@@ -161,18 +161,23 @@ public class UserFlxService {
 
     public ClientFlx getClientFlxByUserFlx(String username) {
         return clientFlxRepository.getClientFlxByUserFlx_Username(username);
-
-
-
     }
 
 
-    public ClientFlx getAuthenticatedUser() {
+    public ClientFlx getAuthenticatedClient() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String authenticatedUsername = authentication.getName();
         return getClientFlxByUserFlx(authenticatedUsername);
     }
 
+    public CoachFlx getCoachFlxByUserFlx(String username) {
+        return coachFlxRepository.getCoachFlxByUserFlx_Username(username);
+    }
 
+    public CoachFlx getAuthenticatedCoach() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String authenticatedUsername = authentication.getName();
+        return getCoachFlxByUserFlx(authenticatedUsername);
+    }
 
 }
