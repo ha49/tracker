@@ -8,14 +8,13 @@ import com.example.tracker.repository.UserFlxRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("api/v1/client")
-@CrossOrigin("http://localhost:8083")
+@RequestMapping("/api/v1/client")
+@CrossOrigin("http://localhost:3000")
 public class ClientFlxController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientFlxController.class);
     private ClientFlxRepository clientFlxRepository;
@@ -46,7 +45,7 @@ public class ClientFlxController {
 
     //    GET ALL
     @GetMapping("/getall")
-//    @PreAuthorize("hasRole('client')")
+//    @PreAuthorize("hasRole('coach')")
     public Iterable<ClientFlx> getAllClients() {
         LOGGER.info("client/getall ☺");
         return clientFlxRepository.findAll();

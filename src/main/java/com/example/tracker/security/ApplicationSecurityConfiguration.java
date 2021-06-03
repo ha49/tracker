@@ -1,6 +1,5 @@
 package com.example.tracker.security;
 
-import com.example.tracker.auth.UserFlx;
 import com.example.tracker.auth.UserFlxDetailsService;
 import com.example.tracker.security.jwt.config.JwtAuthenticationEntryPoint;
 import com.example.tracker.security.jwt.config.JwtRequestFilter;
@@ -19,7 +18,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -120,7 +118,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 //                .hasRole("client")
 
                 .antMatchers("/adminpage").hasRole("admin")
-                .antMatchers("/client/**").hasAnyRole("client", "coach")
+//                .antMatchers("/api/v1/client/**").hasAnyRole("client", "coach")
                 .antMatchers("/coachpage")
                 .hasRole("coach")
 
@@ -147,7 +145,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:8083"));
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "OPTIONS"));
         configuration.setAllowCredentials(true);
