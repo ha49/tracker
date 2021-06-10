@@ -8,8 +8,11 @@ import com.example.tracker.repository.UserFlxRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -93,16 +96,52 @@ public class ClientFlxController {
                 new NoSuchElementException("Client with id " + id + " does not exist "));
     }
 
-//    @PostMapping(
-//            path ="/{id}/image/upload",
-//            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-//            produces = MediaType.APPLICATION_JSON_VALUE
-//    )
+    @PostMapping(
+            path ="/{id}/image/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
 //    public void uploadClientPhoto(@PathVariable long id,
 //                                  @RequestParam("file") MultipartFile file){
+//
+//        // 1. Check if image is not empty
+//        isFileEmpty(file);
+//        // 2. If file is an image
+//        isImage(file);
+//
+//        // 3. The user exists in our database
+//        UserProfile user = getUserProfileOrThrow(userProfileId);
+//
+//        // 4. Grab some metadata from file if any
+//        Map<String, String> metadata = extractMetadata(file);
+//
+//        // 5. Store the image in s3 and update database (userProfileImageLink) with s3 image link
+//        String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), user.getUserProfileId());
+//        String filename = String.format("%s-%s", file.getOriginalFilename(), UUID.randomUUID());
+//
+//        try {
+//            fileStore.save(path, filename, Optional.of(metadata), file.getInputStream());
+//            user.setUserProfileImageLink(filename);
+//        } catch (IOException e) {
+//            throw new IllegalStateException(e);
+//        }
 //        clientFlxRepository.uploadClientPhoto(id, file);
 //    }
+//
+//    private void isImage(MultipartFile file) {
+//        if (!Arrays.asList(
+//                IMAGE_JPEG.getMimeType(),
+//                IMAGE_PNG.getMimeType(),
+//                IMAGE_GIF.getMimeType()).contains(file.getContentType())) {
+//            throw new IllegalStateException("File must be an image [" + file.getContentType() + "]");
+//        }
+//    }
 
+    private void isFileEmpty(MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new IllegalStateException("Cannot upload empty file [ " + file.getSize() + "]");
+        }
+    }
     // NO SUCH ELEMENT EXCEPTION
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)

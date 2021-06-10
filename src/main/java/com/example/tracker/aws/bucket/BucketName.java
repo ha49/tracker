@@ -1,8 +1,8 @@
-//package com.example.tracker.bucket;
+//package com.example.tracker.aws.bucket;
 //
 //public enum BucketName {
 //
-//    PROFILE_IMAGE("cloud-image-app");
+//    PROFILE_IMAGE("flatexfiles");
 //
 //    private final String bucketName;
 //
@@ -15,8 +15,5 @@
 //        return bucketName;
 //
 //    }
-//
-//
-//
 //
 //}
