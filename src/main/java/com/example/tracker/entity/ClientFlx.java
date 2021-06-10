@@ -248,14 +248,23 @@ public class ClientFlx {
                 '}';
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof ClientFlx)) return false;
+//        ClientFlx clientFlx = (ClientFlx) o;
+//        return id == clientFlx.id;
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ClientFlx)) return false;
-        ClientFlx clientFlx = (ClientFlx) o;
-        return id == clientFlx.id;
+        if (o == null || getClass() != o.getClass()) return false;
+       ClientFlx that = (ClientFlx) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(userFlx.getUsername(), that.userFlx.getUsername()) &&
+                Objects.equals(clientPhotoLink, that.clientPhotoLink);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id);
