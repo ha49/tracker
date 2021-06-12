@@ -1,4 +1,4 @@
-package com.example.tracker.jms.sender;
+package com.example.jms.sender;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

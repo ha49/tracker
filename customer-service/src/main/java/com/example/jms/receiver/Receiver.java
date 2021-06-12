@@ -1,6 +1,6 @@
-package com.example.customer.jms.receiver;
+package com.example.jms.receiver;
 
-import com.example.tracker.jms.sender.MessageObjectSend;
+import com.example.jms.sender.MessageObjectSend;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;

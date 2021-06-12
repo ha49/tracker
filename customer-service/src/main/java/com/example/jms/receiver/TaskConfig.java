@@ -1,4 +1,4 @@
-package com.example.customer.jms.receiver;
+package com.example.jms.receiver;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

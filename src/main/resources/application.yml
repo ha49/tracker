@@ -1,0 +1,25 @@
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA5VSF6TZFMA5GVT3X
+      secret-key: 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
+    region:
+      static: eu-north-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: flathexfiles
+
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 5MB
+      max-request-size: 10MB
+
+#server:
+#  port: 9090
